@@ -28,8 +28,8 @@ class App extends Component {
    * Runs when getMidiAccess succeeds (browser has midi)
    * @memberOf App
    */
-  midiSuccess() {
-    console.log('midi exists and is up!')
+  midiSuccess(midiAccess) {
+    console.log('midi is up: ', midiAccess)
   }
 
   render() {
