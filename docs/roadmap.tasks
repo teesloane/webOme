@@ -1,0 +1,21 @@
+User Stories: 
+  MVP:
+    ☐  User should be able to sequence external midi gear
+    ☐  User shoudl be able to choose from different midi devices.
+    ☐  User should be able to set tempo
+    ☐  User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. 
+    ☐  User should be able to set scale / key
+    ☐ User should be able to create their own custom key / scale from a dropdown
+  Advanced Features:
+    ☐ User should be able to choose from more than one "patch" for sequencing (boingg, polygnome, game of life etc)
+    ☐  User should be able to sequence a synth in browser
+    ☐  User should be able to create their own patches ??? (complex)
+    ☐  User should be able to add / remove rows of buttons and their associated key. 
+    ☐  User can rotate the direction notes "move" 
+    ☐ Each OmeBtn can have it's own velocity, gate, pitch, etc. 
+
+
+Moving Parts (ie. State):
+  - available midi devices / what devices is currently selected.
+  - What scale is selected (ID of currently selected scales)
+
