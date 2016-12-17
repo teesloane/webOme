@@ -1,16 +1,17 @@
 /**
- * A single button in the WebOme. Likely, there will be 64 of these.
- * Need to be able to change colour, send a midi note, 
- * possibly: turn "on" the other notes around it...
+ * A button to trigger a note.
+ * long short of it -> press button === play midi note
+ * Details: Each button will have an id that matches up with the midiNotes array in the webOmeStore
+ * Pressing a button will set the note to "playing" or "on" or whatever -- in the animation loop, 
+ * the app will keep checking for which notes are "on" and play them. 
  */
 
-
 import React from 'react';
+import {observer} from 'mobx-react'
 import './OmeBtn.css';
 
-const OmeBtn = props => {
-  const OmeBtnStyle = { backgroundColor: props.color && props.color }
-  return  <main style={OmeBtnStyle} className={`OmeBtn`} onClick={props.playNote } /> 
-};
+var OmeBtn = observer(function OmeBtn(props) {
+  return <main className={`OmeBtn`} onClick={() => props.playNote(props.note.midiNote) } /> 
+})
 
-export default OmeBtn;
+export default OmeBtn
