@@ -18,7 +18,6 @@ class webOme {
     }
   }
 
-  
   /* Store Methods  */
   getMidiAccess = () => {
     console.log('get midi access invoked from app');
