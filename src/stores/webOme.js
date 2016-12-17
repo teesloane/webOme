@@ -10,17 +10,26 @@ class webOme {
   @observable midiOutputs = []
   @observable selectedOutput = undefined
 
+  constructor() {
+    this.getMidiAccess()
+    this.createNotes(32)
+  }
+  /* Store Methods  */
+
+  playNote = (midiNote) => {
+    var noteOnMessage = [0x90, midiNote, 0x7f];  
+    this.selectedOutput.send( noteOnMessage );
+  }
+  
   // This will be created programmatically based on patch type + scale etc.
   createNotes = (limit) => {
     for(let i = 0; i < limit; i++) {
-      var newBtn = new OmeBtnSkeleton('hi', i+40)
+      var newBtn = new OmeBtnSkeleton(`id${i}`, i+40)
       this.midiNotes.push(newBtn)
     }
   }
 
-  /* Store Methods  */
   getMidiAccess = () => {
-    console.log('get midi access invoked from app');
     if (navigator.requestMIDIAccess) {
       navigator.requestMIDIAccess({
         sysex: false, 
@@ -42,4 +51,5 @@ class webOme {
 }
 
 var webOmeStore = window.omeStore = new webOme()
+
 export default webOmeStore

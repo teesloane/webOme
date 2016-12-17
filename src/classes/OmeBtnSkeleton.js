@@ -1,7 +1,7 @@
 export class OmeBtnSkeleton {
-  constructor(id, note, velocity) {
+  constructor(id, midiNote, velocity) {
     this.id = id
-    this.note = note || 64
+    this.midiNote = midiNote || 64
     this.velocity = velocity || 100
   }
 }
