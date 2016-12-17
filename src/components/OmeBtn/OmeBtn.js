@@ -10,7 +10,7 @@ import './OmeBtn.css';
 
 const OmeBtn = props => {
   const OmeBtnStyle = { backgroundColor: props.color && props.color }
-  return  <main style={OmeBtnStyle} className={`OmeBtn`} onClick={props.playNote } /> 
+  return  <main style={OmeBtnStyle} className={`OmeBtn`} onClick={() => props.playNote(props.note.note) } /> 
 };
 
 export default OmeBtn;

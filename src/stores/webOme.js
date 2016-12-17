@@ -1,18 +1,30 @@
+/* eslint-disable */
 import { observable } from 'mobx'
+import {OmeBtnSkeleton} from '../classes/OmeBtnSkeleton';
+
 
 class webOme {
+  @observable midiNotes = []
   @observable midi = undefined
   @observable midiInputs = []
   @observable midiOutputs = []
   @observable selectedOutput = undefined
 
+  // This will be created programmatically based on patch type + scale etc.
+  createNotes = (limit) => {
+    for(let i = 0; i < limit; i++) {
+      var newBtn = new OmeBtnSkeleton('hi', i+40)
+      this.midiNotes.push(newBtn)
+    }
+  }
 
+  
   /* Store Methods  */
   getMidiAccess = () => {
     console.log('get midi access invoked from app');
     if (navigator.requestMIDIAccess) {
       navigator.requestMIDIAccess({
-        sysex: false, // this defaults to 'false' and we won't be covering sysex in this article. 
+        sysex: false, 
       }).then( this.midiSuccess, () => {console.log('midi failed')});
     } else {
       alert("No MIDI support in your browser.");
@@ -30,5 +42,5 @@ class webOme {
 
 }
 
-var webOmeStore = window.webOmeStore = new webOme()
+var webOmeStore = window.omeStore = new webOme()
 export default webOmeStore
