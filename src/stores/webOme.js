@@ -7,15 +7,18 @@
 
 /* eslint-disable */
 import { observable, computed, autorun, extendObservable } from 'mobx'
-// import {OmeBtnSkeleton} from '../classes/OmeBtnSkeleton';
 
 class webOme {
+  // Midi State
   @observable midiNotes = {}
   @observable midi = undefined
   @observable midiInputs = []
   @observable midiOutputs = []
   @observable selectedOutput = undefined
+
+  // On / Functionality state
   @observable playing = false
+  @observable tempo = 90
 
   // gets all notes that are "isPlaying" , send to playNote
   @computed get onNotes() {
@@ -24,15 +27,21 @@ class webOme {
     })
   }
 
+  @computed get bpmTime() {
+    return 60 / this.tempo * 1000
+  }
+
   constructor() {
     this.getMidiAccess()
     this.createNotes(32)
   }
-  /* Store Methods  */
 
+  /* Store Methods  */
   playOme() {
     this.playing = true;
-    setInterval(() => { this.playNote() }, 1000) // <-- tempo eventually.  
+    this.playNote()
+    let timer = setTimeout(() => {this.playOme()}, this.bpmTime)
+
   }
 
   updateMidiNotes(id) {
