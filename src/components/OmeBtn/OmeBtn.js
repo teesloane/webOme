@@ -12,14 +12,14 @@ import './OmeBtn.css';
 import store from '../../stores/webOme'
 
 var OmeBtn = observer(function OmeBtn(props) {
-  let id = props.noteId
-  let isPlaying = store.midiNotes[id].isPlaying
+  const {rowId, noteId} = props
+  let isPlaying = store.midiNotes[rowId][noteId].isPlaying
 
   return (
     <div>
       <main 
         className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
-        onClick={() => store.midiNotes[id].isPlaying = !store.midiNotes[id].isPlaying } 
+        onClick={() => store.midiNotes[rowId][noteId].isPlaying = !store.midiNotes[rowId][noteId].isPlaying } 
       /> 
     </div>
   )

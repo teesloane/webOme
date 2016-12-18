@@ -1,38 +1,58 @@
 /**
- * Eventually I'll need to create a "step" or "beat" for triggering notes that are 
- * specific to a column in time.
- * maybe each note should have a property to indicate what "step" ite belongs to
- * for sequencer like stuff. 
  */
 
 /* eslint-disable */
 import { observable, computed, autorun, extendObservable } from 'mobx'
-// import {OmeBtnSkeleton} from '../classes/OmeBtnSkeleton';
+import parser from 'note-parser'
+
+
+let scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 
 class webOme {
+  // Midi State
   @observable midiNotes = {}
   @observable midi = undefined
   @observable midiInputs = []
   @observable midiOutputs = []
   @observable selectedOutput = undefined
-  @observable playing = false
 
-  // gets all notes that are "isPlaying" , send to playNote
+  @observable numSteps = 8 
+  @observable currentStep = 1
+
+  // On / Functionality state
+  @observable playing = false
+  @observable tempo = 90
+
+  @computed get currentRow() {
+    return `row_${this.currentStep - 1}`
+  }
+
+  // gets all notes that are "isPlaying" from currentStep , send to playNote
   @computed get onNotes() {
-    return Object.keys(this.midiNotes).filter((note) => {
-      return this.midiNotes[note].isPlaying === true
+    // let currentStep = `row_${this.currentStep-1}` // must be minus 1 for 0-based indexing.
+    return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
+      return this.midiNotes[this.currentRow][note].isPlaying === true
     })
+  }
+
+  @computed get bpmTime() {
+    return 60 / this.tempo * 1000
   }
 
   constructor() {
     this.getMidiAccess()
-    this.createNotes(32)
+    this.createNotes(scale)
   }
-  /* Store Methods  */
 
+  /* Store Methods  */
   playOme() {
     this.playing = true;
-    setInterval(() => { this.playNote() }, 1000) // <-- tempo eventually.  
+    if (this.currentStep == 8) this.currentStep = 0
+    this.currentStep += 1 // find a way to return to 0 at 8. 
+    this.playNote()
+
+    let timer = setTimeout(() => {this.playOme()}, this.bpmTime)
+
   }
 
   updateMidiNotes(id) {
@@ -43,23 +63,39 @@ class webOme {
 
   playNote = () => {
     this.onNotes.forEach(note => {
-      var noteOnMessage = [0x90, this.midiNotes[note].midiNote, 0x7f];  
+      console.log(note)
+      var noteOnMessage = [0x90, this.midiNotes[this.currentRow][note].midiNote, 0x7f];  
       this.selectedOutput.send( noteOnMessage );
     })
   }
   
-  // This will be created programmatically based on patch type + scale etc.
-  createNotes = (limit) => {
-    for(let i = 0; i < limit; i++) {
-      let newOmeNote = {}
-      newOmeNote[`button_${i}`] = {
-        id: `button_${i}`,
-        midiNote: i + 40,
-        isPlaying: false,
+
+  /**
+   * Programmtically create notes.
+   * "Row" and "columns" are used interchangeably because I can't my brain
+   * Loop through numSteps --> (8), for each one, loop and create notes from scale.
+   * Pushes a key(row_x) to this.midiNotes with a value of the array of notes. 
+   * Inside App, loop through the keys and create a row for each and the buttons for each row.
+   */
+  createNotes = (scale) => {
+    for (let i = 0; i < this.numSteps; i++) {
+      //  create an array to push object notes into in the next loop
+      // this will represent a column/row. and the next loop is the buttons.
+      let newOmeRow = {}
+      newOmeRow[`row_${i}`] = {}
+      extendObservable(this.midiNotes, newOmeRow)
+      
+      // create the buttons to fill the newRow above^
+      for (let j = 0; j <= scale.length; j++) {
+        let newOmeBtn = {}
+        newOmeBtn[`button_${j}`] = {
+          id: `button_${j}`,
+          midiNote: j + 40, // eventually will be parsed by midi-parser as per scale.
+          isPlaying: false
+        }
+
+        extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
       }
-
-      extendObservable(this.midiNotes, newOmeNote)
-
     }
   }
 
