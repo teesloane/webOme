@@ -1,14 +1,28 @@
-/* eslint-disable */
-import { observable } from 'mobx'
-import {OmeBtnSkeleton} from '../classes/OmeBtnSkeleton';
+/**
+ * Eventually I'll need to create a "step" or "beat" for triggering notes that are 
+ * specific to a column in time.
+ * maybe each note should have a property to indicate what "step" ite belongs to
+ * for sequencer like stuff. 
+ */
 
+/* eslint-disable */
+import { observable, computed, autorun, extendObservable } from 'mobx'
+// import {OmeBtnSkeleton} from '../classes/OmeBtnSkeleton';
 
 class webOme {
-  @observable midiNotes = []
+  @observable midiNotes = {}
   @observable midi = undefined
   @observable midiInputs = []
   @observable midiOutputs = []
   @observable selectedOutput = undefined
+  @observable playing = false
+
+  // gets all notes that are "isPlaying" , send to playNote
+  @computed get onNotes() {
+    return Object.keys(this.midiNotes).filter((note) => {
+      return this.midiNotes[note].isPlaying === true
+    })
+  }
 
   constructor() {
     this.getMidiAccess()
@@ -16,16 +30,36 @@ class webOme {
   }
   /* Store Methods  */
 
-  playNote = (midiNote) => {
-    var noteOnMessage = [0x90, midiNote, 0x7f];  
-    this.selectedOutput.send( noteOnMessage );
+  playOme() {
+    this.playing = true;
+    setInterval(() => { this.playNote() }, 1000) // <-- tempo eventually.  
+  }
+
+  updateMidiNotes(id) {
+    console.log('update midi notes called', id)
+    let note = this.midiNotes[id]
+    note.isPlaying = !note.isPlaying
+  }
+
+  playNote = () => {
+    this.onNotes.forEach(note => {
+      var noteOnMessage = [0x90, this.midiNotes[note].midiNote, 0x7f];  
+      this.selectedOutput.send( noteOnMessage );
+    })
   }
   
   // This will be created programmatically based on patch type + scale etc.
   createNotes = (limit) => {
     for(let i = 0; i < limit; i++) {
-      var newBtn = new OmeBtnSkeleton(`id${i}`, i+40)
-      this.midiNotes.push(newBtn)
+      let newOmeNote = {}
+      newOmeNote[`button_${i}`] = {
+        id: `button_${i}`,
+        midiNote: i + 40,
+        isPlaying: false,
+      }
+
+      extendObservable(this.midiNotes, newOmeNote)
+
     }
   }
 

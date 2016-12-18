@@ -9,9 +9,20 @@
 import React from 'react';
 import {observer} from 'mobx-react'
 import './OmeBtn.css';
+import store from '../../stores/webOme'
 
 var OmeBtn = observer(function OmeBtn(props) {
-  return <main className={`OmeBtn`} onClick={() => props.playNote(props.note.midiNote) } /> 
+  let id = props.noteId
+  let isPlaying = store.midiNotes[id].isPlaying
+
+  return (
+    <div>
+      <main 
+        className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
+        onClick={() => store.midiNotes[id].isPlaying = !store.midiNotes[id].isPlaying } 
+      /> 
+    </div>
+  )
 })
 
 export default OmeBtn
