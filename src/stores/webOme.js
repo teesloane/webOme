@@ -1,12 +1,12 @@
 /**
- * Eventually I'll need to create a "step" or "beat" for triggering notes that are 
- * specific to a column in time.
- * maybe each note should have a property to indicate what "step" ite belongs to
- * for sequencer like stuff. 
  */
 
 /* eslint-disable */
 import { observable, computed, autorun, extendObservable } from 'mobx'
+import parser from 'note-parser'
+
+
+let scale = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 
 class webOme {
   // Midi State
@@ -15,6 +15,8 @@ class webOme {
   @observable midiInputs = []
   @observable midiOutputs = []
   @observable selectedOutput = undefined
+
+  @observable numSteps = 8
 
   // On / Functionality state
   @observable playing = false
@@ -33,7 +35,7 @@ class webOme {
 
   constructor() {
     this.getMidiAccess()
-    this.createNotes(32)
+    this.createNotes(scale)
   }
 
   /* Store Methods  */
@@ -57,19 +59,45 @@ class webOme {
     })
   }
   
-  // This will be created programmatically based on patch type + scale etc.
-  createNotes = (limit) => {
-    for(let i = 0; i < limit; i++) {
-      let newOmeNote = {}
-      newOmeNote[`button_${i}`] = {
-        id: `button_${i}`,
-        midiNote: i + 40,
-        isPlaying: false,
+
+  /**
+   * Programmtically create notes.
+   * "Row" and "columns" are used interchangeably because I can't my brain
+   * Loop through numSteps --> (8), for each one, loop and create notes from scale.
+   * Pushes a key(row_x) to this.midiNotes with a value of the array of notes. 
+   * Inside App, loop through the keys and create a row for each and the buttons for each row.
+   */
+  createNotes = (scale) => {
+    for (let i = 0; i < this.numSteps; i++) {
+      //  create an array to push object notes into in the next loop
+      // this will represent a column/row. and the next loop is the buttons.
+      let newOmeRow = {}
+      newOmeRow[`row_${i}`] = {}
+      extendObservable(this.midiNotes, newOmeRow)
+      
+      // create the buttons to fill the newRow above^
+      for (let j = 0; j <= scale.length; j++) {
+        let newOmeBtn = {}
+        newOmeBtn[`button_${j}`] = {
+          id: `button_${j}`,
+          midiNote: j + 40, // eventually will be parsed by midi-parser as per scale.
+          isPlaying: false
+        }
+
+        extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
       }
-
-      extendObservable(this.midiNotes, newOmeNote)
-
     }
+    // for(let i = 0; i < limit; i++) {
+    //   let newOmeNote = {}
+    //   newOmeNote[`button_${i}`] = {
+    //     id: `button_${i}`,
+    //     midiNote: i + 40,
+    //     isPlaying: false,
+    //   }
+
+    // extendObservable(this.midiNotes, newOmeNote)
+
+    
   }
 
   getMidiAccess = () => {
