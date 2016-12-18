@@ -16,16 +16,22 @@ class webOme {
   @observable midiOutputs = []
   @observable selectedOutput = undefined
 
-  @observable numSteps = 8
+  @observable numSteps = 8 
+  @observable currentStep = 1
 
   // On / Functionality state
   @observable playing = false
   @observable tempo = 90
 
-  // gets all notes that are "isPlaying" , send to playNote
+  @computed get currentRow() {
+    return `row_${this.currentStep - 1}`
+  }
+
+  // gets all notes that are "isPlaying" from currentStep , send to playNote
   @computed get onNotes() {
-    return Object.keys(this.midiNotes).filter((note) => {
-      return this.midiNotes[note].isPlaying === true
+    // let currentStep = `row_${this.currentStep-1}` // must be minus 1 for 0-based indexing.
+    return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
+      return this.midiNotes[this.currentRow][note].isPlaying === true
     })
   }
 
@@ -41,7 +47,10 @@ class webOme {
   /* Store Methods  */
   playOme() {
     this.playing = true;
+    if (this.currentStep == 8) this.currentStep = 0
+    this.currentStep += 1 // find a way to return to 0 at 8. 
     this.playNote()
+
     let timer = setTimeout(() => {this.playOme()}, this.bpmTime)
 
   }
@@ -54,7 +63,8 @@ class webOme {
 
   playNote = () => {
     this.onNotes.forEach(note => {
-      var noteOnMessage = [0x90, this.midiNotes[note].midiNote, 0x7f];  
+      console.log(note)
+      var noteOnMessage = [0x90, this.midiNotes[this.currentRow][note].midiNote, 0x7f];  
       this.selectedOutput.send( noteOnMessage );
     })
   }
@@ -87,17 +97,6 @@ class webOme {
         extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
       }
     }
-    // for(let i = 0; i < limit; i++) {
-    //   let newOmeNote = {}
-    //   newOmeNote[`button_${i}`] = {
-    //     id: `button_${i}`,
-    //     midiNote: i + 40,
-    //     isPlaying: false,
-    //   }
-
-    // extendObservable(this.midiNotes, newOmeNote)
-
-    
   }
 
   getMidiAccess = () => {

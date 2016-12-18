@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import './OmeRow.css';
 import OmeBtn from '../OmeBtn/OmeBtn';
 
@@ -17,7 +17,8 @@ const OmeRow = props => {
 };
 
 OmeRow.propTypes = {
- 
+  rowId: PropTypes.string,
+  notes: PropTypes.object,
 };
 
 export default OmeRow;
