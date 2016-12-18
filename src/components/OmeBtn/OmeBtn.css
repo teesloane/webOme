@@ -7,3 +7,7 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+.OmeBtn-on {
+  background: red;
+}
