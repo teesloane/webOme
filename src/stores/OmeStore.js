@@ -1,13 +1,11 @@
 /**
  */
 
-/* eslint-disable */
-import { observable, computed, autorun, extendObservable } from 'mobx'
+import { observable, computed, autorun, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 
 // Temporary scale. Replace with a scales JSON file.
 let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
-
 
 class OmeStore {
   // Midi-related State
@@ -25,7 +23,9 @@ class OmeStore {
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
+  
   @computed get bpmTime() { return 60 / this.tempo * 1000 }
+
   @computed get onNotes() {
     // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
@@ -112,6 +112,8 @@ class OmeStore {
     this.midi = midiAccess
     this.selectedOutput = this.midiOutputs[0] // make this selectable for multiple
   }
+
+  @action changeTempo = (e) => { this.tempo = e.target.value }
 
 }
 

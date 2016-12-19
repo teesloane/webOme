@@ -1,7 +1,7 @@
 import { observable } from 'mobx'
 
 class UiStore {
-  @observable menuOpen = false
+  @observable menuOpen = true 
 }
 
 var uiStore = window.uiStore = new UiStore()
