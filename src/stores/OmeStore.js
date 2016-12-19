@@ -9,7 +9,7 @@ import parser from 'note-parser'
 let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
 
 
-class webOme {
+class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
   @observable midi = undefined
@@ -17,7 +17,7 @@ class webOme {
   @observable midiOutputs = []
   @observable selectedOutput = undefined
 
-  // WebOme functionality state
+  // OmeStore functionality state
   @observable numSteps = 8 
   @observable currentStep = 1
   @observable playing = false
@@ -61,12 +61,11 @@ class webOme {
       this.selectedOutput.send( noteOnMessage );
     })
   }
+
   
-
-
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
-   * @description Create a data structure of midiNotes to loop over and populate the webOme with
+   * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
    */
   createNotes = (scale) => {
@@ -116,6 +115,7 @@ class webOme {
 
 }
 
-var webOmeStore = window.omeStore = new webOme()
+var omeStore = window.omeStore = new OmeStore()
 
-export default webOmeStore
+export default omeStore
+

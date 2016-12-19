@@ -21,6 +21,7 @@ Dev / Feats:
   ☐ Create a play / pause button
   ☐ Make it possible to change the note for a row in the standard sequencer mode. 
   ☐ available midi devices / what devices is currently selected.
+  ☐ Be able to adjust tempo
 
 Sequencer Builds: 
   ☐ Standard sequencer (left to right step by step)

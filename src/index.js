@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App';
-import webOmeStore from './stores/webOme';
+import OmeStore from './stores/OmeStore';
 import './index.css';
 
 ReactDOM.render(
-  <App webOmeStore={webOmeStore} />,
+  <App OmeStore={OmeStore} />,
   document.getElementById('root')
 );
