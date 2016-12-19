@@ -32,12 +32,10 @@ class App extends Component {
     return (
       <div className="App">
         <DevTools />
-
         <Menu />
-        
         <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
-        <button onClick={() => store.playing = !store.playing }> Pause / Play </button>
-
+        <button onClick={store.togglePlay}> Pause / Play </button>
+        <button className="App-Menu-toggle">Menu</button>
       </div>
     );
   }

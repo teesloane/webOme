@@ -114,6 +114,7 @@ class OmeStore {
   }
 
   @action changeTempo = (e) => { this.tempo = e.target.value }
+  @action togglePlay = () => { this.playing = !this.playing }
 
 }
 
