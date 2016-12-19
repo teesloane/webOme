@@ -1,0 +1,9 @@
+.Menu {
+  display: flex;
+  background: #A1B5C5;
+  flex-basis: 200px;
+}
+
+.Menu--hide {
+  display: none;
+}

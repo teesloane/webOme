@@ -4,6 +4,7 @@ import DevTools from 'mobx-react-devtools';
 import OmeRow from '../OmeRow/OmeRow'
 import UiStore from '../../stores/UiStore'
 import './App.css';
+import Menu from '../Menu/Menu';
 
 @observer
 class App extends Component {
@@ -19,19 +20,22 @@ class App extends Component {
     let midiRows = Object.keys(midiNotes)
     return midiRows.map(row => {
       let currentRow = midiNotes[row]
-      return <OmeRow key={row} rowId={row} notes={currentRow} />
+      return (
+        <OmeRow key={row} rowId={row} notes={currentRow} />
+      )
     }) 
   }
 
   render() {
     let store = this.props.OmeStore
-    let UiStore = UiStore
 
     return (
       <div className="App">
         <DevTools />
-        { this.renderMidiRow() }
 
+        <Menu />
+        
+        <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
         <button onClick={() => store.playing = !store.playing }> Pause / Play </button>
 
       </div>

@@ -1,3 +1,11 @@
 .App {
   display: flex;
+  min-height: 100vh;
+}
+
+.App-OmeContainer {
+  display: flex;
+  background: #efefef;
+  align-self: center;
+  
 }

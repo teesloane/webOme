@@ -1,7 +1,8 @@
-import { observable, computed } from 'mobX'
+import { observable } from 'mobx'
 
 class UiStore {
   @observable menuOpen = false
 }
 
-export default new UiStore()
+var uiStore = window.uiStore = new UiStore()
+export default uiStore
