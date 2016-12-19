@@ -16,12 +16,10 @@ var OmeBtn = observer(function OmeBtn(props) {
   let isPlaying = store.midiNotes[rowId][noteId].isPlaying
 
   return (
-    <div>
-      <main 
-        className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
-        onClick={() => store.midiNotes[rowId][noteId].isPlaying = !store.midiNotes[rowId][noteId].isPlaying } 
-      /> 
-    </div>
+    <main 
+      className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
+      onClick={() => store.midiNotes[rowId][noteId].isPlaying = !store.midiNotes[rowId][noteId].isPlaying } 
+    >{props.note.midiNote}</main> 
   )
 })
 
