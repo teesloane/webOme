@@ -21,7 +21,7 @@ class webOme {
   @observable numSteps = 8 
   @observable currentStep = 1
   @observable playing = false
-  @observable tempo = 90
+  @observable tempo = 120
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
@@ -45,11 +45,8 @@ class webOme {
    */
   playOme() {
     if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
-  
-    this.playing = true;
     this.currentStep += 1 
     this.playNote()
-
     let timer = setTimeout(() => { this.playOme() }, this.bpmTime)
   }
 
@@ -58,12 +55,14 @@ class webOme {
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
   playNote = () => {
+    if (!this.playing) return
     this.onNotes.forEach(note => {
       var noteOnMessage = [0x90, this.midiNotes[this.currentRow][note].midiNote, 0x7f];  
       this.selectedOutput.send( noteOnMessage );
     })
   }
   
+
 
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`

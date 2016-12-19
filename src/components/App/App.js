@@ -12,21 +12,24 @@ class App extends Component {
     this.props.webOmeStore.playOme()
   }
 
-  render() {
+  renderMidiRow() {
+    /* render row + pass array of buttons */
     let midiNotes = this.props.webOmeStore.midiNotes
     let midiRows = Object.keys(midiNotes)
-    // THIS PROBABLY NEEDS SOME LODASH LOVE I THINK UGH
-    /* render row + pass array of buttons */
+    return midiRows.map(row => {
+      let currentRow = midiNotes[row]
+      return <OmeRow key={row} rowId={row} notes={currentRow} />
+    }) 
+  }
+
+  render() {
+    let store = this.props.webOmeStore
     return (
       <div className="App">
         <DevTools />
+        { this.renderMidiRow() }
 
-        {
-         midiRows.map(row => {
-           let currentRow = midiNotes[row]
-           return <OmeRow key={row} rowId={row} notes={currentRow} />
-         }) 
-        }
+        <button onClick={() => store.playing = !store.playing }> Pause / Play </button>
 
       </div>
     );
