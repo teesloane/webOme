@@ -15,7 +15,15 @@ User Stories:
     ☐ Each OmeBtn can have it's own velocity, gate, pitch, etc. 
 
 
-Moving Parts (ie. State):
-  - available midi devices / what devices is currently selected.
-  - What scale is selected (ID of currently selected scales)
+Dev / Feats:
+  ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself.
+  ☐ Set up a way to change key
+  ☐ Create a play / pause button
+  ☐ Make it possible to change the note for a row in the standard sequencer mode. 
+  ☐ available midi devices / what devices is currently selected.
+
+Sequencer Builds: 
+  ☐ Standard sequencer (left to right step by step)
+  ☐ boingg
+  ☐ Flin
 

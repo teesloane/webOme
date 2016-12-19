@@ -5,6 +5,7 @@
 import { observable, computed, autorun, extendObservable } from 'mobx'
 import parser from 'note-parser'
 
+// Temporary scale. Replace with a scales JSON file.
 let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
 
 
@@ -25,9 +26,8 @@ class webOme {
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
   @computed get bpmTime() { return 60 / this.tempo * 1000 }
-
-  // gets all notes that are "isPlaying" from currentStep , send to playNote
   @computed get onNotes() {
+    // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
       return this.midiNotes[this.currentRow][note].isPlaying === true
     })
@@ -39,17 +39,20 @@ class webOme {
     this.createNotes(scale)
   }
 
+
   /**
    * @description Start the sequencer; run recursively to play notes.
    */
   playOme() {
     if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
+  
     this.playing = true;
     this.currentStep += 1 
     this.playNote()
 
     let timer = setTimeout(() => { this.playOme() }, this.bpmTime)
   }
+
 
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
@@ -61,6 +64,7 @@ class webOme {
     })
   }
   
+
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the webOme with
@@ -85,6 +89,8 @@ class webOme {
       }
     }
   }
+
+
   /**
    * @description: Called on successful access to midi object. Sets inputs and ouputs to state.
    */
@@ -95,6 +101,7 @@ class webOme {
       alert("Your browser does not support Midi. Bummer.");
     }
   }
+
 
   /**
    * @description: Called on successful access to midi object. Sets inputs and ouputs to state.
