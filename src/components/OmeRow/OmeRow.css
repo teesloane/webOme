@@ -1,3 +1,4 @@
 .OmeRow {
   display: flex;
+  flex-direction: column;
 }
