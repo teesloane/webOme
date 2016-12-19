@@ -21,7 +21,7 @@ class webOme {
   @observable numSteps = 8 
   @observable currentStep = 1
   @observable playing = false
-  @observable tempo = 150
+  @observable tempo = 90
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
