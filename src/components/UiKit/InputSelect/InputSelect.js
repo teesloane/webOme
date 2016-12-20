@@ -6,23 +6,23 @@ import './InputSelect.css';
 const InputSelect = function(props) {
   return (
     <main className="InputSelect">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label htmlFor={props.id}>{props.name}</label>
       <Select 
         id={props.id} 
         name={props.name}
         value={props.value}
         options={props.options}
         onChange={props.onChange}
-        value={props.value}
-      />
+    />
     </main>
   );
 };
 
 InputSelect.propTypes = {
   id: PropTypes.node,
-  label: PropTypes.string,
-  // value: PropTypes.number,
+  value: PropTypes.any,
+  options: PropTypes.array,
+  onChange: PropTypes.func,
 };
 
 export default InputSelect

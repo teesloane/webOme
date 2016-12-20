@@ -1,6 +1,7 @@
 .Menu {
   display: flex;
   background: #A1B5C5;
+  flex-direction: column;
   max-width: 250px;
   padding: 1rem;
   flex: 1
@@ -13,5 +14,4 @@
 .Menu-section {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }

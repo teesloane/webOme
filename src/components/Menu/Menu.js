@@ -4,6 +4,7 @@ import UiStore from '../../stores/UiStore'
 import InputNumber from '../UiKit/InputNumber/InputNumber'
 import InputSelect from '../UiKit/InputSelect/InputSelect';
 import './Menu.css';
+import omeStore from '../../stores/OmeStore';
 
 /**
  * 
@@ -17,6 +18,17 @@ var things = [
     { value: 'two', label: 'Two' }
 ]; 
 
+/**
+ * 
+ * @param {array} arr - the array to be transformed into an array of objects.
+ * @param {string} labelFromObjectKey - used to give name to the label, if the object has something worth pulling from as a name.
+ * @returns an array of objects where each array item has a "label" and the value (which is the iterated item)
+ */
+function createSelectorOptions(arr, labelFromObjectKey) {
+  let n = labelFromObjectKey
+  return arr.map(item => { return { label: item[n] || "no label", value: item }})
+}
+
 const Menu = observer(function Menu(props) {
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
@@ -24,11 +36,15 @@ const Menu = observer(function Menu(props) {
       {/*Section: Tempo, Grid */}
       <section className="Menu-section">
         <InputNumber label="Tempo" />
-        <InputSelect name="Grid Resolution" label="Grid Resolution" value={things[0]} options={things} onChange={() => console.log('suck it')} />
+        <InputSelect name="Grid Resolution" value={things[0]} options={things} onChange={() => console.log('test')} />
       </section>
 
       {/*Section: Scale, Key, Custom Note Mode */}
 
+      {/*Section: Midi Setup */}
+      <section className="Menu-section">
+        <InputSelect name="Midi Output" options={createSelectorOptions(omeStore.midiOutputs, "name")} />
+      </section>
     </main>
   );
 });
@@ -36,5 +52,6 @@ const Menu = observer(function Menu(props) {
 Menu.propTypes = {
   isOpen: PropTypes.bool,
 };
+
 
 export default Menu;
