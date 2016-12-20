@@ -42,8 +42,14 @@ const Menu = observer(function Menu(props) {
       {/*Section: Scale, Key, Custom Note Mode */}
 
       {/*Section: Midi Setup */}
+      {/* "value=" is broken... */}
       <section className="Menu-section">
-        <InputSelect name="Midi Output" options={createSelectorOptions(omeStore.midiOutputs, "name")} />
+        <InputSelect 
+          name="Midi Output" 
+          options={createSelectorOptions(omeStore.midiOutputs, "name")} 
+
+          onChange={omeStore.changeSelectedMidiDevice } 
+        />
       </section>
     </main>
   );

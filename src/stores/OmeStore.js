@@ -44,8 +44,9 @@ class OmeStore {
   @action changeTempo = (e) => { this.tempo = e.target.value }
 
   @action togglePlay = () => { this.playing = !this.playing }
-  
-  @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice }
+
+  // Specifically Tailored for handling changes from react-selector component.
+  @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
 
   // "Patch Related Methods"    
