@@ -1,33 +1,45 @@
+Priority: Menu Fill out:
+  ☐ Make midi devices switchable (`react-select`) @easy
+  ☐ Grid resolution for bpm / tempo speed. @easy 
+    ☐ alter the @computed bpmTempo property to include dividing the resulting time by "@observable gridResolution"
+  ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself. @hard
+  ☐ Set up a way to change key @hard
+  ☐ Make it possible to change the note for a row in the standard sequencer mode. @hard
+  ☐ available midi devices / what devices is currently selected.
+
 User Stories: 
   MVP:
     ✔ User should be able to sequence software (IAC Bus) @done (12/19/2016, 6:53:20 PM)
-    ☐ User should be able to sequence external midi gear
-    ☐ User should be able to choose from different midi devices.
+    ☐ User should be able to sequence external midi gear ( need gear to test on )
+    ☐ User should be able to choose from different midi devices. @high 
     ✔ User should be able to set tempo @done (12/19/2016, 6:53:25 PM)
     ✔ User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. @done (12/19/2016, 6:53:31 PM)
-    ☐ User should be able to set scale / key
-    ☐ User should be able to create their own custom key / scale from a dropdown
+    ✔ Create a play / pause button @done (12/19/2016, 10:02:11 PM)
+    ☐ User should be able to set scale / key @high 
+    ☐ User should be able to create their own custom key / scale from a dropdown @low
+    ☐ Hitting "Space" should start / stop the sequencer
   Advanced Features:
     ☐ User should be able to choose from more than one "patch" for sequencing (boingg, polygnome, game of life etc)
-    ☐  User should be able to sequence a synth in browser
-    ☐  User should be able to create their own patches ??? (complex)
-    ☐  User should be able to add / remove rows of buttons and their associated key. 
-    ☐  User can rotate the direction notes "move" 
-    ☐  Each OmeBtn can have it's own velocity, gate, pitch, etc. 
+    ☐ User should be able to sequence a synth in browser
+    ☐ User should be able to create their own patches ??? (complex)
+    ☐ User should be able to add / remove rows of buttons and their associated key. 
+    ☐ User can rotate the direction notes "move" 
+    ☐ Each OmeBtn can have it's own velocity, gate, pitch, etc. 
+    ☐ Sequence "banks" for switching on the fly. 
+    ☐ Tap tempo 
 
-Dev / Feats:
-  ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself.
-  ☐ Set up a way to change key
-  ☐ Create a play / pause button
-  ☐ Make it possible to change the note for a row in the standard sequencer mode. 
-  ☐ available midi devices / what devices is currently selected.
-  ☐ Be able to adjust tempo
-
-Cool Things Someday:
-  ☐ Tap tempo
 
 Sequencer Builds: 
-  ☐ Standard sequencer (left to right step by step)
-  ☐ boingg
-  ☐ Flin
+  Standard sequencer (left to right step by step):  
+    MVP:
+      ☐ indicators for currently playing row. 
+
+    Advanced:
+      ☐ 
+      ☐ 
+
+  boingg:
+
+  Flin:
+
 

@@ -1,7 +1,10 @@
-import { observable } from 'mobx'
+import { observable, action} from 'mobx'
 
 class UiStore {
-  @observable menuOpen = true 
+  @observable menuOpen = true
+
+  // Actions
+  @action toggleMenu = () => { this.menuOpen = !this.menuOpen }
 }
 
 var uiStore = window.uiStore = new UiStore()
