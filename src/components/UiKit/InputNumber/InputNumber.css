@@ -1,0 +1,4 @@
+.InputNumber {
+  display: flex;
+  flex-direction: column;
+}

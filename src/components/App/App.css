@@ -1,3 +1,18 @@
 .App {
   display: flex;
+  min-height: 100vh;
+}
+
+.App-OmeContainer {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.App-Menu-toggle {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1rem;
 }

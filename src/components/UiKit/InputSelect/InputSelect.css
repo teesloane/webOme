@@ -1,0 +1,4 @@
+.InputSelect {
+  display: flex;
+  flex-direction: column;
+}

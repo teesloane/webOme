@@ -1,15 +1,13 @@
 /**
  */
 
-/* eslint-disable */
-import { observable, computed, autorun, extendObservable } from 'mobx'
+import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 
 // Temporary scale. Replace with a scales JSON file.
 let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
 
-
-class webOme {
+class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
   @observable midi = undefined
@@ -17,7 +15,7 @@ class webOme {
   @observable midiOutputs = []
   @observable selectedOutput = undefined
 
-  // WebOme functionality state
+  // OmeStore functionality state
   @observable numSteps = 8 
   @observable currentStep = 1
   @observable playing = false
@@ -25,7 +23,9 @@ class webOme {
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
+  
   @computed get bpmTime() { return 60 / this.tempo * 1000 }
+
   @computed get onNotes() {
     // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
@@ -47,7 +47,7 @@ class webOme {
     if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
     this.currentStep += 1 
     this.playNote()
-    let timer = setTimeout(() => { this.playOme() }, this.bpmTime)
+    setTimeout(() => { this.playOme() }, this.bpmTime)
   }
 
 
@@ -61,12 +61,11 @@ class webOme {
       this.selectedOutput.send( noteOnMessage );
     })
   }
+
   
-
-
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
-   * @description Create a data structure of midiNotes to loop over and populate the webOme with
+   * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
    */
   createNotes = (scale) => {
@@ -114,8 +113,12 @@ class webOme {
     this.selectedOutput = this.midiOutputs[0] // make this selectable for multiple
   }
 
+  @action changeTempo = (e) => { this.tempo = e.target.value }
+  @action togglePlay = () => { this.playing = !this.playing }
+
 }
 
-var webOmeStore = window.omeStore = new webOme()
+var omeStore = window.omeStore = new OmeStore()
 
-export default webOmeStore
+export default omeStore
+
