@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import OmeRow from '../OmeRow/OmeRow'
-import UiStore from '../../stores/UiStore'
 import './App.css';
 import Menu from '../Menu/Menu';
 

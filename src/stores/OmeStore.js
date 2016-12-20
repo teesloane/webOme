@@ -1,7 +1,7 @@
 /**
  */
 
-import { observable, computed, autorun, extendObservable, action } from 'mobx'
+import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 
 // Temporary scale. Replace with a scales JSON file.
@@ -47,7 +47,7 @@ class OmeStore {
     if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
     this.currentStep += 1 
     this.playNote()
-    let timer = setTimeout(() => { this.playOme() }, this.bpmTime)
+    setTimeout(() => { this.playOme() }, this.bpmTime)
   }
 
 

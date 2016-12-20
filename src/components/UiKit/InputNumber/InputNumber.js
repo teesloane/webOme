@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import {observer} from 'mobx-react'
 import './InputNumber.css';
-import uiStore from '../../../stores/UiStore';
 import omeStore from '../../../stores/OmeStore';
 
 const InputNumber = observer(function(props) {
