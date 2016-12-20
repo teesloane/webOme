@@ -23,9 +23,7 @@ class OmeStore {
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
-  
   @computed get bpmTime() { return 60 / this.tempo * 1000 }
-
   @computed get onNotes() {
     // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
@@ -33,24 +31,23 @@ class OmeStore {
     })
   }
 
+  /* ------- Methods ------- */
 
   constructor() {
     this.getMidiAccess()
     this.createNotes(scale)
+    this.playOme()
   }
 
 
-  /**
-   * @description Start the sequencer; run recursively to play notes.
-   */
-  playOme() {
-    if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
-    this.currentStep += 1 
-    this.playNote()
-    setTimeout(() => { this.playOme() }, this.bpmTime)
-  }
+  // Actions
+  @action changeTempo = (e) => { this.tempo = e.target.value }
+  
+  @action togglePlay = () => { this.playing = !this.playing }
 
 
+  // "Patch Related Methods"    
+  
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
@@ -62,7 +59,21 @@ class OmeStore {
     })
   }
 
-  
+
+  //Setup Methods
+
+  /**
+   * @description Start the sequencer; run recursively to play notes.
+   * Note: Midinotes will not actually be fired until "this.playing = true"
+   */
+  playOme() {
+    if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
+    this.currentStep += 1 
+    this.playNote()
+    setTimeout(() => { this.playOme() }, this.bpmTime)
+  }
+
+
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
@@ -90,11 +101,13 @@ class OmeStore {
 
 
   /**
-   * @description: Called on successful access to midi object. Sets inputs and ouputs to state.
+   * @description: Called on successful access to midi object. Sets inputs and ouputs on state.
    */
   getMidiAccess = () => {
     if (navigator.requestMIDIAccess) {
-      navigator.requestMIDIAccess().then(this.midiSuccess, () => { console.log('midi failed') });
+      navigator.requestMIDIAccess()
+        .then(this.midiSuccess, () => { console.log('midi failed') });
+      
     } else {
       alert("Your browser does not support Midi. Bummer.");
     }
@@ -102,7 +115,8 @@ class OmeStore {
 
 
   /**
-   * @description: Called on successful access to midi object. Sets inputs and ouputs to state.
+   * @description: Function passed to promise on successful access to browser Midi. 
+   * Sets inputs and ouputs to state.
    */
   midiSuccess = (midiAccess) => {
     // midiAccess.outputs is a MAP --> hence grabbing [1] and not [0].
@@ -113,12 +127,7 @@ class OmeStore {
     this.selectedOutput = this.midiOutputs[0] // make this selectable for multiple
   }
 
-  @action changeTempo = (e) => { this.tempo = e.target.value }
-  @action togglePlay = () => { this.playing = !this.playing }
-
 }
 
 var omeStore = window.omeStore = new OmeStore()
-
 export default omeStore
-

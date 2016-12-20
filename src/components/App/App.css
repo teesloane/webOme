@@ -16,3 +16,17 @@
   bottom: 0;
   padding: 1rem;
 }
+
+/* Monome Emu + Start / Stop */
+.App-MainContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  flex: 1;
+}
+
+.App-Btn--play {
+  align-self: center;
+  margin: 1rem;
+  padding: 1rem;
+}
