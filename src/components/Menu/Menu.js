@@ -30,6 +30,11 @@ function createSelectorOptions(arr, labelFromObjectKey) {
 }
 
 const Menu = observer(function Menu(props) {
+
+  // midi loads async, so wait until it's loaded until returning.
+  // TODO: replace this with proper async notifier / spinner / alert.
+  let selectedMidiOut = omeStore.selectedMidiOut; if (!selectedMidiOut) return null
+
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
 
@@ -45,10 +50,12 @@ const Menu = observer(function Menu(props) {
       {/* "value=" is broken... */}
       <section className="Menu-section">
         <InputSelect 
+          className="Select-custom"
           name="Midi Output" 
           options={createSelectorOptions(omeStore.midiOutputs, "name")} 
-
-          onChange={omeStore.changeSelectedMidiDevice } 
+          value={{label: selectedMidiOut.name, value: selectedMidiOut}}
+          onChange={ omeStore.changeSelectedMidiDevice } 
+          clearable={false}
         />
       </section>
     </main>

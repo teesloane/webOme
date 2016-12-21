@@ -3,11 +3,14 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css';
 import './InputSelect.css';
 
+const customStyles = { borderRadius: 0 }
+
 const InputSelect = function(props) {
   return (
     <main className="InputSelect">
-      <label htmlFor={props.id}>{props.name}</label>
+      <label className="label-standard" htmlFor={props.id}>{props.name}</label>
       <Select 
+        style={customStyles}
         id={props.id} 
         name={props.name}
         value={props.value}

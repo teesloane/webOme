@@ -6,7 +6,7 @@ import omeStore from '../../../stores/OmeStore';
 const InputNumber = observer(function(props) {
   return (
     <main className="InputNumber">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label className="label-standard" htmlFor={props.id}>{props.label}</label>
       <input id={props.id} type="number" onChange={omeStore.changeTempo} value={omeStore.tempo} />
     </main>
   );
