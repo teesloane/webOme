@@ -16,6 +16,7 @@ const InputSelect = function(props) {
         value={props.value}
         options={props.options}
         onChange={props.onChange}
+        clearable={props.clearable}
     />
     </main>
   );

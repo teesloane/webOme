@@ -8,18 +8,6 @@ import omeStore from '../../stores/OmeStore';
 
 /**
  * 
- * @param {any} props
- * @description the main menu for controlling everything in the webOme. 
- * 
- */
-
-var things = [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two' }
-]; 
-
-/**
- * 
  * @param {array} arr - the array to be transformed into an array of objects.
  * @param {string} labelFromObjectKey - used to give name to the label, if the object has something worth pulling from as a name.
  * @returns an array of objects where each array item has a "label" and the value (which is the iterated item)
@@ -41,13 +29,12 @@ const Menu = observer(function Menu(props) {
       {/*Section: Tempo, Grid */}
       <section className="Menu-section">
         <InputNumber label="Tempo" />
-        <InputSelect name="Grid Resolution" value={things[0]} options={things} onChange={() => console.log('test')} />
+        <InputSelect name="Grid Resolution" clearable={false} />
       </section>
 
       {/*Section: Scale, Key, Custom Note Mode */}
 
       {/*Section: Midi Setup */}
-      {/* "value=" is broken... */}
       <section className="Menu-section">
         <InputSelect 
           className="Select-custom"
