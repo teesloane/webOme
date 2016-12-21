@@ -13,7 +13,7 @@ class OmeStore {
   @observable midi = undefined
   @observable midiInputs = []
   @observable midiOutputs = []
-  @observable selectedOutput = undefined
+  @observable selectedMidiOut = undefined
 
   // OmeStore functionality state
   @observable numSteps = 8 
@@ -42,8 +42,11 @@ class OmeStore {
 
   // Actions
   @action changeTempo = (e) => { this.tempo = e.target.value }
-  
+
   @action togglePlay = () => { this.playing = !this.playing }
+
+  // Specifically Tailored for handling changes from react-selector component.
+  @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
 
   // "Patch Related Methods"    
@@ -55,7 +58,7 @@ class OmeStore {
     if (!this.playing) return
     this.onNotes.forEach(note => {
       var noteOnMessage = [0x90, this.midiNotes[this.currentRow][note].midiNote, 0x7f];  
-      this.selectedOutput.send( noteOnMessage );
+      this.selectedMidiOut.send( noteOnMessage );
     })
   }
 
@@ -124,7 +127,7 @@ class OmeStore {
     for (let midiInput of midiAccess.inputs) { this.midiInputs.push(midiInput[1]) }
 
     this.midi = midiAccess
-    this.selectedOutput = this.midiOutputs[0] // make this selectable for multiple
+    this.selectedMidiOut = this.midiOutputs[0] // TODO: make this selectable for multiple
   }
 
 }

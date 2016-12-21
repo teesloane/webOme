@@ -3,26 +3,30 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css';
 import './InputSelect.css';
 
+const customStyles = { borderRadius: 0 }
+
 const InputSelect = function(props) {
   return (
     <main className="InputSelect">
-      <label htmlFor={props.id}>{props.label}</label>
+      <label className="label-standard" htmlFor={props.id}>{props.name}</label>
       <Select 
+        style={customStyles}
         id={props.id} 
         name={props.name}
         value={props.value}
         options={props.options}
         onChange={props.onChange}
-        value={props.value}
-      />
+        clearable={props.clearable}
+    />
     </main>
   );
 };
 
 InputSelect.propTypes = {
   id: PropTypes.node,
-  label: PropTypes.string,
-  // value: PropTypes.number,
+  value: PropTypes.any,
+  options: PropTypes.array,
+  onChange: PropTypes.func,
 };
 
 export default InputSelect

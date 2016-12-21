@@ -12,6 +12,10 @@ body {
 
 /* Input Elements */
 input {
-  padding: 0.5rem;
+  padding: 1rem;
+  
+}
+
+.label-standard {
   margin: 0.5rem 0;
 }
