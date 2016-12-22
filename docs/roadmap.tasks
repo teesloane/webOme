@@ -1,5 +1,5 @@
 Priority: Menu Fill out:
-  ☐ Make midi devices switchable (`react-select`) @easy
+  ✔ Make midi devices switchable (`react-select`) @easy @done (12/22/2016, 5:49:57 PM)
   ☐ Grid resolution for bpm / tempo speed. @easy 
     ☐ alter the @computed bpmTempo property to include dividing the resulting time by "@observable gridResolution"
   ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself. @hard
@@ -11,13 +11,16 @@ User Stories:
   MVP:
     ✔ User should be able to sequence software (IAC Bus) @done (12/19/2016, 6:53:20 PM)
     ☐ User should be able to sequence external midi gear ( need gear to test on )
-    ☐ User should be able to choose from different midi devices. @high 
+    ✔ User should be able to choose from different midi devices. @high @done (12/22/2016, 4:17:43 PM)
     ✔ User should be able to set tempo @done (12/19/2016, 6:53:25 PM)
     ✔ User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. @done (12/19/2016, 6:53:31 PM)
     ✔ Create a play / pause button @done (12/19/2016, 10:02:11 PM)
     ☐ User should be able to set scale / key @high 
     ☐ User should be able to create their own custom key / scale from a dropdown @low
     ☐ Hitting "Space" should start / stop the sequencer
+  
+  MVP-2 - Edge cases, handling errors, styling:
+
   Advanced Features:
     ☐ User should be able to choose from more than one "patch" for sequencing (boingg, polygnome, game of life etc)
     ☐ User should be able to sequence a synth in browser
@@ -27,6 +30,7 @@ User Stories:
     ☐ Each OmeBtn can have it's own velocity, gate, pitch, etc. 
     ☐ Sequence "banks" for switching on the fly. 
     ☐ Tap tempo 
+    ☐ Handle disconnected midi device.
 
 
 Sequencer Builds: 

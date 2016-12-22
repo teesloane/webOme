@@ -20,10 +20,11 @@ class OmeStore {
   @observable currentStep = 1
   @observable playing = false
   @observable tempo = 120
+  @observable grid = 1
 
   // Computed values
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
-  @computed get bpmTime() { return 60 / this.tempo * 1000 }
+  @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
   @computed get onNotes() {
     // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
@@ -44,6 +45,8 @@ class OmeStore {
   @action changeTempo = (e) => { this.tempo = e.target.value }
 
   @action togglePlay = () => { this.playing = !this.playing }
+
+  @action changeGrid = (newGrid) => { this.grid = newGrid.value}
 
   // Specifically Tailored for handling changes from react-selector component.
   @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }

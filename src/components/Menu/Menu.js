@@ -6,6 +6,13 @@ import InputSelect from '../UiKit/InputSelect/InputSelect';
 import './Menu.css';
 import omeStore from '../../stores/OmeStore';
 
+const GRID = [
+  {label: "1" , value: 1},
+  {label: "1/2" , value: 2},
+  {label: "1/4" , value: 4},
+  {label: "1/8" , value: 8},
+]
+
 /**
  * 
  * @param {array} arr - the array to be transformed into an array of objects.
@@ -29,7 +36,14 @@ const Menu = observer(function Menu(props) {
       {/*Section: Tempo, Grid */}
       <section className="Menu-section">
         <InputNumber label="Tempo" />
-        <InputSelect name="Grid Resolution" clearable={false} />
+        <InputSelect 
+          className="Select-custom" 
+          name="Grid Resolution" 
+          clearable={false} 
+          value={{label: `1/${omeStore.grid}`, value: omeStore.grid}}
+          options={GRID}
+          onChange={omeStore.changeGrid}
+        />
       </section>
 
       {/*Section: Scale, Key, Custom Note Mode */}
