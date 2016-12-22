@@ -35,7 +35,7 @@ const Menu = observer(function Menu(props) {
 
       {/*Section: Tempo, Grid */}
       <section className="Menu-section">
-        <InputNumber label="Tempo" />
+        <InputNumber label="Tempo" max="240" />
         <InputSelect 
           className="Select-custom" 
           name="Grid Resolution" 

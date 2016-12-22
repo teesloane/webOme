@@ -1,7 +1,7 @@
 Priority: Menu Fill out:
   ✔ Make midi devices switchable (`react-select`) @easy @done (12/22/2016, 5:49:57 PM)
-  ☐ Grid resolution for bpm / tempo speed. @easy 
-    ☐ alter the @computed bpmTempo property to include dividing the resulting time by "@observable gridResolution"
+  ✔ Grid resolution for bpm / tempo speed. @easy @done (12/22/2016, 6:16:39 PM)
+    ✔ alter the @computed bpmTempo property to include dividing the resulting time by "@observable gridResolution" @done (12/22/2016, 6:16:44 PM)
   ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself. @hard
   ☐ Set up a way to change key @hard
   ☐ Make it possible to change the note for a row in the standard sequencer mode. @hard

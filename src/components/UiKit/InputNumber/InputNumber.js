@@ -7,7 +7,7 @@ const InputNumber = observer(function(props) {
   return (
     <main className="InputNumber">
       <label className="label-standard" htmlFor={props.id}>{props.label}</label>
-      <input id={props.id} type="number" onChange={omeStore.changeTempo} value={omeStore.tempo} />
+      <input id={props.id} type="number" max={props.max} onChange={omeStore.changeTempo} value={omeStore.tempo} />
     </main>
   );
 });
