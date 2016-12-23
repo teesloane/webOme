@@ -1,9 +1,7 @@
-/**
- */
-
 import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
-import {scales, chromaticScale, scaleMaker} from '../utils/scales.js'
+import { chromaticScale, scaleMaker } from '../utils/scales.js'
+import { SCALES } from '../music_constants'
 
 class OmeStore {
   // Midi-related State
@@ -15,7 +13,7 @@ class OmeStore {
 
   // key / scale
   @observable key = "E3"
-  @observable selectedScale = scales.minor
+  @observable selectedScale = SCALES.minor
 
   // OmeStore functionality state
   @observable numSteps = 8 
@@ -25,14 +23,21 @@ class OmeStore {
   @observable grid = 1
 
   // Computed values
+
+  // used to display key in react selector - slices octave data ("3") off string
+  @computed get showSelectedKey() { return this.key.substring(0, this.key.length - 1)}
+
+  // use scaleMaker to compute a [scale] to pass into Create / notes.
   @computed get scaleNotes() { return scaleMaker(this.key, this.selectedScale)}
 
+  // something  something -- create current row thing 
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
 
+  // calculate a final bpm time, used in a setTimeout for tempo simulation.
   @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
 
+  // gets all notes that are "isPlaying" from currentStep , send to playNote
   @computed get onNotes() {
-    // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
       return this.midiNotes[this.currentRow][note].isPlaying === true
     })
@@ -48,6 +53,13 @@ class OmeStore {
 
   // Actions
 
+  @action togglePlay = () => { this.playing = !this.playing }
+
+  // Specifically Tailored for handling changes from react-select component.
+  @action selectGrid = (newGrid) => { this.grid = newGrid.value}
+  @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
+  @action selectKey = (newKey) => { this.key = newKey.value; this.createNotes(this.scaleNotes) } // createNotes deletes sequence.
+
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
     if (newTempo < 10) { this.tempo = 10 }
@@ -55,12 +67,6 @@ class OmeStore {
     else { this.tempo = e.target.value }
   }
 
-  @action togglePlay = () => { this.playing = !this.playing }
-
-  @action changeGrid = (newGrid) => { this.grid = newGrid.value}
-
-  // Specifically Tailored for handling changes from react-selector component.
-  @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
 
   // "Patch Related" Methods //
@@ -95,6 +101,7 @@ class OmeStore {
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
+   * TODO: write a similar fn --> replaceNotes --> for changing key but not erasing sequence. 
    */
   createNotes = (scale) => {
     for (let i = 0; i < this.numSteps; i++) {

@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react'
 import { observer } from 'mobx-react'
+
 import UiStore from '../../stores/UiStore'
 import InputNumber from '../UiKit/InputNumber/InputNumber'
 import InputSelect from '../UiKit/InputSelect/InputSelect';
-import './Menu.css';
 import omeStore from '../../stores/OmeStore';
 
-const GRID = [
-  {label: "1" , value: 1},
-  {label: "1/2" , value: 2},
-  {label: "1/4" , value: 4},
-  {label: "1/8" , value: 8},
-]
+import {KEYS_SELECTOR, SCALES, GRID} from '../../music_constants'
+import './Menu.css';
+
+
 
 /**
  * 
  * @param {array} arr - the array to be transformed into an array of objects.
  * @param {string} labelFromObjectKey - used to give name to the label, if the object has something worth pulling from as a name.
+ * @param {bool} For handling arrays of just strings that need to become selectors. TODO: refactor this to type checks?
  * @returns an array of objects where each array item has a "label" and the value (which is the iterated item)
+ * @description used solely for formatting data for a react-select component. 
  */
-function createSelectorOptions(arr, labelFromObjectKey) {
+function createSelectorOptions(arr, labelFromObjectKey, areStrings) {
   let n = labelFromObjectKey
   return arr.map(item => { return { label: item[n] || "no label", value: item }})
 }
@@ -42,11 +42,21 @@ const Menu = observer(function Menu(props) {
           clearable={false} 
           value={{label: `1/${omeStore.grid}`, value: omeStore.grid}}
           options={GRID}
-          onChange={omeStore.changeGrid}
+          onChange={omeStore.selectGrid}
         />
       </section>
 
       {/*Section: Scale, Key, Custom Note Mode */}
+      <section className="Menu-section">
+        <InputSelect 
+          className="Select-custom"
+          name="Key" 
+          options={KEYS_SELECTOR} 
+          value={{label: omeStore.showSelectedKey, value: omeStore.key}}
+          onChange={omeStore.selectKey} 
+          clearable={false}
+        />
+      </section>
 
       {/*Section: Midi Setup */}
       <section className="Menu-section">
@@ -55,7 +65,7 @@ const Menu = observer(function Menu(props) {
           name="Midi Output" 
           options={createSelectorOptions(omeStore.midiOutputs, "name")} 
           value={{label: selectedMidiOut.name, value: selectedMidiOut}}
-          onChange={ omeStore.changeSelectedMidiDevice } 
+          onChange={ omeStore.selectMidiDevice } 
           clearable={false}
         />
       </section>
