@@ -3,9 +3,7 @@
 
 import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
-
-// Temporary scale. Replace with a scales JSON file.
-let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
+import {scales, chromaticScale, scaleMaker} from '../utils/scales.js'
 
 class OmeStore {
   // Midi-related State
@@ -15,6 +13,10 @@ class OmeStore {
   @observable midiOutputs = []
   @observable selectedMidiOut = undefined
 
+  // key / scale
+  @observable key = "E3"
+  @observable selectedScale = scales.minor
+
   // OmeStore functionality state
   @observable numSteps = 8 
   @observable currentStep = 1
@@ -23,8 +25,12 @@ class OmeStore {
   @observable grid = 1
 
   // Computed values
+  @computed get scaleNotes() { return scaleMaker(this.key, this.selectedScale)}
+
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
+
   @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
+
   @computed get onNotes() {
     // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
@@ -36,14 +42,12 @@ class OmeStore {
 
   constructor() {
     this.getMidiAccess()
-    this.createNotes(scale)
+    this.createNotes(this.scaleNotes)
     this.playOme()
   }
 
-
   // Actions
 
-  // check that tempo ! < 10 || > 240
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
     if (newTempo < 10) { this.tempo = 10 }
@@ -59,8 +63,8 @@ class OmeStore {
   @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
 
-  // "Patch Related Methods"    
-  
+  // "Patch Related" Methods //
+
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
@@ -73,7 +77,7 @@ class OmeStore {
   }
 
 
-  //Setup Methods
+  //Setup Methods //
 
   /**
    * @description Start the sequencer; run recursively to play notes.
@@ -142,5 +146,5 @@ class OmeStore {
 
 }
 
-var omeStore = window.omeStore = new OmeStore()
+const omeStore = window.omeStore = new OmeStore()
 export default omeStore
