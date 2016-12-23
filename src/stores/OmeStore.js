@@ -42,7 +42,14 @@ class OmeStore {
 
 
   // Actions
-  @action changeTempo = (e) => { this.tempo = e.target.value }
+
+  // check that tempo ! < 10 || > 240
+  @action changeTempo = (e) => { 
+    let newTempo = e.target.value
+    if (newTempo < 10) { this.tempo = 10 }
+    else if (newTempo > 240) { this.tempo = 240 }
+    else { this.tempo = e.target.value }
+  }
 
   @action togglePlay = () => { this.playing = !this.playing }
 
