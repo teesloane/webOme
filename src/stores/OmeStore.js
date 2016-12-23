@@ -58,7 +58,7 @@ class OmeStore {
   // Specifically Tailored for handling changes from react-select component.
   @action selectGrid = (newGrid) => { this.grid = newGrid.value}
   @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
-  @action selectKey = (newKey) => { this.key = newKey.value; this.createNotes(this.scaleNotes) } // createNotes deletes sequence.
+  @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
 
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
@@ -121,6 +121,34 @@ class OmeStore {
         extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
       }
     }
+  }
+
+  
+  /**
+   * 
+   * @param {scale} 
+   * @memberOf OmeStore
+   * @summary: loops through this.midiNotes and changes each row's notes, without overwriting the sequence.
+   * BUG: Changing keys causes a timeout glitch where the sequence sort of skips.
+   * BUG: scaleMaker doesn't organize notes in proper ascending order (octave issues)
+   */
+  updateNotes = (scale) => {
+    let rows = Object.keys(this.midiNotes)
+
+    for(let i = 0; i < rows.length; i++) {
+      let currentRow = rows[i]
+      let notes = Object.keys(this.midiNotes[currentRow])
+
+      for(let j = 0; j < notes.length; j++) {
+        let currentNote = notes[j]
+        let newButton = this.midiNotes[currentRow][currentNote]
+        newButton.midiNote = parser.midi(scale[j])
+
+
+      }
+    }
+    // loop through the object keys for each row
+    // loop through each row and change the notes to the notes of the scale. 
   }
 
 
