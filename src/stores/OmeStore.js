@@ -2,6 +2,7 @@ import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { chromaticScale, scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
+import _ from 'lodash'
 
 window.parser = parser
 
@@ -15,7 +16,7 @@ class OmeStore {
 
   // key / scale
   @observable key = "A#3"
-  @observable selectedScale = SCALES.minor
+  @observable scale = SCALES.major
 
   // OmeStore functionality state
   @observable numSteps = 8 
@@ -27,10 +28,18 @@ class OmeStore {
   // Computed values
 
   // used to display key in react selector - slices octave data ("3") off string
-  @computed get showSelectedKey() { return this.key.substring(0, this.key.length - 1)}
+  @computed get selectedKey() { return { label: this.key.substring(0, this.key.length - 1), value: this.key }}
+
+  @computed get selectedScale() { return {label:"thing", value: this.scale}}
+
+  @computed get scaleOptions() {
+    let scaleOptions = []
+    _.forEach(SCALES, (v, k) => { scaleOptions.push({label: k, value: v}) })
+    return scaleOptions
+  }
 
   // use scaleMaker to compute a [scale] to pass into Create / notes.
-  @computed get scaleNotes() { return scaleMaker(this.key, this.selectedScale)}
+  @computed get scaleNotes() { return scaleMaker(this.key, this.scale)}
 
   // something  something -- create current row thing 
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
