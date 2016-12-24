@@ -16,6 +16,7 @@ User Stories:
     ✔ User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. @done (12/19/2016, 6:53:31 PM)
     ✔ Create a play / pause button @done (12/19/2016, 10:02:11 PM)
     ☐ User should be able to set scale / key @high 
+    ☐ Set octave
     ☐ User should be able to create their own custom key / scale from a dropdown @low
     ☐ Hitting "Space" should start / stop the sequencer
   

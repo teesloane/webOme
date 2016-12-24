@@ -1,11 +1,9 @@
-/**
- */
-
 import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
+import { chromaticScale, scaleMaker } from '../utils/scales.js'
+import { SCALES } from '../music_constants'
 
-// Temporary scale. Replace with a scales JSON file.
-let scale = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4']
+window.parser = parser
 
 class OmeStore {
   // Midi-related State
@@ -15,6 +13,10 @@ class OmeStore {
   @observable midiOutputs = []
   @observable selectedMidiOut = undefined
 
+  // key / scale
+  @observable key = "A#3"
+  @observable selectedScale = SCALES.minor
+
   // OmeStore functionality state
   @observable numSteps = 8 
   @observable currentStep = 1
@@ -23,10 +25,21 @@ class OmeStore {
   @observable grid = 1
 
   // Computed values
+
+  // used to display key in react selector - slices octave data ("3") off string
+  @computed get showSelectedKey() { return this.key.substring(0, this.key.length - 1)}
+
+  // use scaleMaker to compute a [scale] to pass into Create / notes.
+  @computed get scaleNotes() { return scaleMaker(this.key, this.selectedScale)}
+
+  // something  something -- create current row thing 
   @computed get currentRow() { return  `row_${this.currentStep - 1}` }
+
+  // calculate a final bpm time, used in a setTimeout for tempo simulation.
   @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
+
+  // gets all notes that are "isPlaying" from currentStep , send to playNote
   @computed get onNotes() {
-    // gets all notes that are "isPlaying" from currentStep , send to playNote
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
       return this.midiNotes[this.currentRow][note].isPlaying === true
     })
@@ -36,14 +49,21 @@ class OmeStore {
 
   constructor() {
     this.getMidiAccess()
-    this.createNotes(scale)
+    this.createNotes(this.scaleNotes)
     this.playOme()
   }
 
-
   // Actions
 
-  // check that tempo ! < 10 || > 240
+  @action togglePlay = () => { this.playing = !this.playing }
+
+  // Specifically Tailored for handling changes from react-select component.
+  @action selectGrid = (newGrid) => { this.grid = newGrid.value}
+  
+  @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
+
+  @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
+
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
     if (newTempo < 10) { this.tempo = 10 }
@@ -51,16 +71,10 @@ class OmeStore {
     else { this.tempo = e.target.value }
   }
 
-  @action togglePlay = () => { this.playing = !this.playing }
-
-  @action changeGrid = (newGrid) => { this.grid = newGrid.value}
-
-  // Specifically Tailored for handling changes from react-selector component.
-  @action changeSelectedMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
 
-  // "Patch Related Methods"    
-  
+  // "Patch Related" Methods //
+
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
@@ -73,7 +87,7 @@ class OmeStore {
   }
 
 
-  //Setup Methods
+  //Setup Methods //
 
   /**
    * @description Start the sequencer; run recursively to play notes.
@@ -91,6 +105,7 @@ class OmeStore {
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
+   * TODO: write a similar fn --> replaceNotes --> for changing key but not erasing sequence. 
    */
   createNotes = (scale) => {
     for (let i = 0; i < this.numSteps; i++) {
@@ -110,6 +125,34 @@ class OmeStore {
         extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
       }
     }
+  }
+
+  
+  /**
+   * 
+   * @param {scale} 
+   * @memberOf OmeStore
+   * @summary: loops through this.midiNotes and changes each row's notes, without overwriting the sequence.
+   * BUG: Changing keys causes a timeout glitch where the sequence sort of skips.
+   * BUG: scaleMaker doesn't organize notes in proper ascending order (octave issues)
+   */
+  updateNotes = (scale) => {
+    let rows = Object.keys(this.midiNotes)
+
+    for(let i = 0; i < rows.length; i++) {
+      let currentRow = rows[i]
+      let notes = Object.keys(this.midiNotes[currentRow])
+
+      for(let j = 0; j < notes.length; j++) {
+        let currentNote = notes[j]
+        let newButton = this.midiNotes[currentRow][currentNote]
+        newButton.midiNote = parser.midi(scale[j])
+
+
+      }
+    }
+    // loop through the object keys for each row
+    // loop through each row and change the notes to the notes of the scale. 
   }
 
 
@@ -142,5 +185,5 @@ class OmeStore {
 
 }
 
-var omeStore = window.omeStore = new OmeStore()
+const omeStore = window.omeStore = new OmeStore()
 export default omeStore
