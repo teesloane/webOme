@@ -3,6 +3,8 @@ import parser from 'note-parser'
 import { chromaticScale, scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 
+window.parser = parser
+
 class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
@@ -12,7 +14,7 @@ class OmeStore {
   @observable selectedMidiOut = undefined
 
   // key / scale
-  @observable key = "E3"
+  @observable key = "A#3"
   @observable selectedScale = SCALES.minor
 
   // OmeStore functionality state
@@ -57,7 +59,9 @@ class OmeStore {
 
   // Specifically Tailored for handling changes from react-select component.
   @action selectGrid = (newGrid) => { this.grid = newGrid.value}
+  
   @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
+
   @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
 
   @action changeTempo = (e) => { 
