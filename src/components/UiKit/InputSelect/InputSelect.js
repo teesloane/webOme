@@ -17,6 +17,8 @@ const InputSelect = function(props) {
         options={props.options}
         onChange={props.onChange}
         clearable={props.clearable}
+        deleteRemoves={false}
+        backspaceRemoves={false}
     />
     </main>
   );

@@ -32,6 +32,10 @@ const Menu = observer(function Menu(props) {
   // TODO: replace this with proper async notifier / spinner / alert.
   let selectedMidiOut = omeStore.selectedMidiOut; if (!selectedMidiOut) return null
 
+  const handleDeleteKey = () => {
+    console.log('hi')
+  }
+
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
 
@@ -57,15 +61,17 @@ const Menu = observer(function Menu(props) {
           value={omeStore.selectedKey}
           onChange={omeStore.selectKey} 
           clearable={false}
+          deleteRemoves={false}
         />
-
 
         <InputSelect 
           className="Select-custom"
           name="Scale" 
-          options={omeStore.scaleOptions} 
+          options={SCALES} 
+          onChange={omeStore.selectScale}
           value={omeStore.selectedScale}
           clearable={false}
+          deleteRemoves={false}
         />
       </section>
 
@@ -78,6 +84,7 @@ const Menu = observer(function Menu(props) {
           value={{label: selectedMidiOut.name, value: selectedMidiOut}}
           onChange={ omeStore.selectMidiDevice } 
           clearable={false}
+          deleteRemoves={false}
         />
       </section>
     </main>
