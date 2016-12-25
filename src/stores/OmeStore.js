@@ -153,8 +153,7 @@ class OmeStore {
    * @param {scale} 
    * @memberOf OmeStore
    * @summary: loops through this.midiNotes and changes each row's notes, without overwriting the sequence.
-   * BUG: Changing keys causes a timeout glitch where the sequence sort of skips.
-   * BUG: scaleMaker doesn't organize notes in proper ascending order (octave issues)
+   * TODO: lodash refactor?
    */
   updateNotes = (scale) => {
     let rows = Object.keys(this.midiNotes)
@@ -167,12 +166,8 @@ class OmeStore {
         let currentNote = notes[j]
         let newButton = this.midiNotes[currentRow][currentNote]
         newButton.midiNote = parser.midi(scale[j])
-
-
       }
     }
-    // loop through the object keys for each row
-    // loop through each row and change the notes to the notes of the scale. 
   }
 
 
