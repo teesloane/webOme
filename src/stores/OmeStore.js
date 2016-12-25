@@ -1,6 +1,6 @@
 import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
-import { chromaticScale, scaleMaker } from '../utils/scales.js'
+import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 
 class OmeStore {

@@ -19,3 +19,10 @@ input {
 .label-standard {
   margin: 0.5rem 0;
 }
+
+.btn {
+  margin: 1rem;
+  padding: 1rem;
+  border: 0;
+  background: #efefef;
+}

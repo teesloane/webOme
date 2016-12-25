@@ -9,6 +9,13 @@ import './App.css';
 
 @observer
 class App extends Component {
+
+  componentDidMount() {
+    document.addEventListener('keydown', (e) => {
+      if (e.code === "Space") OmeStore.togglePlay()
+    })
+  }
+
   renderMidiRow() {
     /* render row + pass array of buttons */
     let midiRows = Object.keys(OmeStore.midiNotes)
@@ -30,7 +37,12 @@ class App extends Component {
         {/* Main Box - Monome + Play toggle*/}
         <main className="App-MainContainer">
           <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
-          <button className="App-Btn--play" onClick={OmeStore.togglePlay}> Pause / Play </button>
+          <button 
+            className={`App-playBtn ${OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused' }`} 
+            onClick={OmeStore.togglePlay}
+          >
+            {OmeStore.playing ? 'Pause' : 'Play' } 
+          </button>
         </main>
 
       </div>
