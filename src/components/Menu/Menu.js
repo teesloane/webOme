@@ -19,6 +19,8 @@ import './Menu.css';
  * @returns an array of objects where each array item has a "label" and the value (which is the iterated item)
  * @description used solely for formatting data for a react-select component. 
  */
+
+// TODO: Refactor to a computed element in the omeStore
 function createSelectorOptions(arr, labelFromObjectKey, areStrings) {
   let n = labelFromObjectKey
   return arr.map(item => { return { label: item[n] || "no label", value: item }})
@@ -52,9 +54,20 @@ const Menu = observer(function Menu(props) {
           className="Select-custom"
           name="Key" 
           options={KEYS_SELECTOR} 
-          value={{label: omeStore.showSelectedKey, value: omeStore.key}}
+          value={omeStore.selectedKey}
           onChange={omeStore.selectKey} 
           clearable={false}
+          deleteRemoves={false}
+        />
+
+        <InputSelect 
+          className="Select-custom"
+          name="Scale" 
+          options={SCALES} 
+          onChange={omeStore.selectScale}
+          value={omeStore.selectedScale}
+          clearable={false}
+          deleteRemoves={false}
         />
       </section>
 
@@ -67,6 +80,7 @@ const Menu = observer(function Menu(props) {
           value={{label: selectedMidiOut.name, value: selectedMidiOut}}
           onChange={ omeStore.selectMidiDevice } 
           clearable={false}
+          deleteRemoves={false}
         />
       </section>
     </main>

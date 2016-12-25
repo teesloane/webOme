@@ -2,10 +2,9 @@ Priority: Menu Fill out:
   ✔ Make midi devices switchable (`react-select`) @easy @done (12/22/2016, 5:49:57 PM)
   ✔ Grid resolution for bpm / tempo speed. @easy @done (12/22/2016, 6:16:39 PM)
     ✔ alter the @computed bpmTempo property to include dividing the resulting time by "@observable gridResolution" @done (12/22/2016, 6:16:44 PM)
-  ☐ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself. @hard
-  ☐ Set up a way to change key @hard
-  ☐ Make it possible to change the note for a row in the standard sequencer mode. @hard
-  ☐ available midi devices / what devices is currently selected.
+  ✔ Create a "scales" json file. This would dictate the steps between notes rather than the notes itself. @done (12/24/2016, 5:02:02 PM)
+  ✔ Set up a way to change key @done (12/24/2016, 5:00:24 PM)
+  ✔ available midi devices / what devices is currently selected. @done (12/24/2016, 5:00:45 PM)
 
 User Stories: 
   MVP:
@@ -17,12 +16,12 @@ User Stories:
     ✔ Create a play / pause button @done (12/19/2016, 10:02:11 PM)
     ☐ User should be able to set scale / key @high 
     ☐ Set octave
-    ☐ User should be able to create their own custom key / scale from a dropdown @low
     ☐ Hitting "Space" should start / stop the sequencer
   
   MVP-2 - Edge cases, handling errors, styling:
 
   Advanced Features:
+    ☐ Make it possible to change the note for a row in the standard sequencer mode. 
     ☐ User should be able to choose from more than one "patch" for sequencing (boingg, polygnome, game of life etc)
     ☐ User should be able to sequence a synth in browser
     ☐ User should be able to create their own patches ??? (complex)
@@ -33,18 +32,9 @@ User Stories:
     ☐ Tap tempo 
     ☐ Handle disconnected midi device.
 
-
 Sequencer Builds: 
   Standard sequencer (left to right step by step):  
-    MVP:
-      ☐ indicators for currently playing row. 
-
-    Advanced:
-      ☐ 
-      ☐ 
-
   boingg:
-
   Flin:
 
 

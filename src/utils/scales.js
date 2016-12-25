@@ -8,6 +8,8 @@ export const chromaticScale = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3'
  * @returns {array} : A set of strings representing a scale
  */
 export function scaleMaker(key, scaleType) {
+  if (!key || !scaleType) return
+
   let CS = ['C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3']
   let interval = 0;
   const newScale = [];

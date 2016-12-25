@@ -3,8 +3,6 @@ import parser from 'note-parser'
 import { chromaticScale, scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 
-window.parser = parser
-
 class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
@@ -15,7 +13,8 @@ class OmeStore {
 
   // key / scale
   @observable key = "A#3"
-  @observable selectedScale = SCALES.minor
+  @observable scale = SCALES[0].value // `.value` comes from the object structure of a "react-select" component.
+  @observable scaleName = SCALES[0].label // same as above ^
 
   // OmeStore functionality state
   @observable numSteps = 8 
@@ -24,16 +23,31 @@ class OmeStore {
   @observable tempo = 120
   @observable grid = 1
 
-  // Computed values
+  /* ------- Computed Values ------- */
 
   // used to display key in react selector - slices octave data ("3") off string
-  @computed get showSelectedKey() { return this.key.substring(0, this.key.length - 1)}
+  @computed get selectedKey() { 
+    
+    return { 
+      label: this.key.substring(0, this.key.length - 1), 
+      value: this.key 
+    }
+  }
+
+  @computed get selectedScale() { 
+    return { 
+      label: this.scaleName, 
+      value: this.scale,
+    }
+  }
 
   // use scaleMaker to compute a [scale] to pass into Create / notes.
-  @computed get scaleNotes() { return scaleMaker(this.key, this.selectedScale)}
+  @computed get scaleNotes() { 
+    return scaleMaker(this.key, this.scale)
+  }
 
   // something  something -- create current row thing 
-  @computed get currentRow() { return  `row_${this.currentStep - 1}` }
+  @computed get currentRow() { return `row_${this.currentStep - 1}` }
 
   // calculate a final bpm time, used in a setTimeout for tempo simulation.
   @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
@@ -63,6 +77,12 @@ class OmeStore {
   @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
   @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
+
+  @action selectScale = (newScale) => {
+    this.scale = newScale.value
+    this.scaleName = newScale.label
+    this.updateNotes(this.scaleNotes)
+  }
 
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
