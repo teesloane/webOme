@@ -32,10 +32,6 @@ const Menu = observer(function Menu(props) {
   // TODO: replace this with proper async notifier / spinner / alert.
   let selectedMidiOut = omeStore.selectedMidiOut; if (!selectedMidiOut) return null
 
-  const handleDeleteKey = () => {
-    console.log('hi')
-  }
-
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
 

@@ -2,9 +2,6 @@ import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { chromaticScale, scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
-import _ from 'lodash'
-
-window.parser = parser
 
 class OmeStore {
   // Midi-related State
@@ -26,7 +23,7 @@ class OmeStore {
   @observable tempo = 120
   @observable grid = 1
 
-  // Computed values
+  /* ------- Computed Values ------- */
 
   // used to display key in react selector - slices octave data ("3") off string
   @computed get selectedKey() { 
