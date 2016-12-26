@@ -50,6 +50,7 @@ const Menu = observer(function Menu(props) {
 
       {/*Section: Scale, Key, Custom Note Mode */}
       <section className="Menu-section">
+        {/* Key */}
         <InputSelect 
           className="Select-custom"
           name="Key" 
@@ -60,6 +61,7 @@ const Menu = observer(function Menu(props) {
           deleteRemoves={false}
         />
 
+        {/* Scales */}
         <InputSelect 
           className="Select-custom"
           name="Scale" 
@@ -69,6 +71,13 @@ const Menu = observer(function Menu(props) {
           clearable={false}
           deleteRemoves={false}
         />
+
+        {/* Octave +/- */}
+        <section>
+          <button onClick={omeStore.incrementOctave}>+</button>
+          <div>{omeStore.octave}</div>
+          <button onClick={omeStore.decrementOctave}>-</button>
+        </section>
       </section>
 
       {/*Section: Midi Setup */}

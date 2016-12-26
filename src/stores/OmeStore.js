@@ -22,12 +22,12 @@ class OmeStore {
   @observable playing = false
   @observable tempo = 120
   @observable grid = 1
+  @observable octave = 0
 
   /* ------- Computed Values ------- */
 
   // used to display key in react selector - slices octave data ("3") off string
   @computed get selectedKey() { 
-    
     return { 
       label: this.key.substring(0, this.key.length - 1), 
       value: this.key 
@@ -68,7 +68,6 @@ class OmeStore {
   }
 
   // Actions
-
   @action togglePlay = () => { this.playing = !this.playing }
 
   // Specifically Tailored for handling changes from react-select component.
@@ -77,6 +76,16 @@ class OmeStore {
   @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
   @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
+
+  @action incrementOctave = () => {
+    if (this.octave === 2) return this.octave
+    this.octave += 1
+  }
+
+  @action decrementOctave = () => {
+    if (this.octave === -2) return this.octave
+    this.octave -= 1
+  }
 
   @action selectScale = (newScale) => {
     this.scale = newScale.value
@@ -91,8 +100,6 @@ class OmeStore {
     else { this.tempo = e.target.value }
   }
 
-
-
   // "Patch Related" Methods //
 
   /**
@@ -101,7 +108,8 @@ class OmeStore {
   playNote = () => {
     if (!this.playing) return
     this.onNotes.forEach(note => {
-      var noteOnMessage = [0x90, this.midiNotes[this.currentRow][note].midiNote, 0x7f];  
+      let noteToPlay = this.midiNotes[this.currentRow][note].midiNote + (this.octave * 12)
+      var noteOnMessage = [0x90, noteToPlay , 0x7f];  
       this.selectedMidiOut.send( noteOnMessage );
     })
   }
