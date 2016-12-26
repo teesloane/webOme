@@ -2,8 +2,9 @@ import React from 'react';
 import {observer} from 'mobx-react'
 import './OmeBtn.css';
 import OmeStore from '../../stores/OmeStore'
+import { midiToNote } from '../../music_constants/index'
 
-
+console.log(midiToNote)
 /**
  * @description OmeStore button. Can turn on or off.
  * Interaction: onClick -> set it's state reference to it's inverse
@@ -17,7 +18,7 @@ var OmeBtn = observer(function OmeBtn(props) {
     <main 
       className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
       onClick={() => OmeStore.midiNotes[rowId][noteId].isPlaying = !OmeStore.midiNotes[rowId][noteId].isPlaying } 
-    >{props.note.midiNote}</main> 
+    >{midiToNote[props.note.midiNote]}</main> 
   )
 })
 
