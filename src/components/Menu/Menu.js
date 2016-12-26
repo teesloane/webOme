@@ -73,10 +73,10 @@ const Menu = observer(function Menu(props) {
         />
 
         {/* Octave +/- */}
-        <section>
-          <button onClick={omeStore.incrementOctave}>+</button>
-          <div>{omeStore.octave}</div>
-          <button onClick={omeStore.decrementOctave}>-</button>
+        <section className="Menu-octave-box">
+          <button className="btn" onClick={omeStore.decrementOctave}>-</button>
+          <div>Octave: {omeStore.octave}</div>
+          <button className="btn" onClick={omeStore.incrementOctave}>+</button>
         </section>
       </section>
 

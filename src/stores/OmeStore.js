@@ -13,7 +13,7 @@ class OmeStore {
 
   // key / scale
   @observable key = "A#3"
-  @observable scale = SCALES[0].value // `.value` comes from the object structure of a "react-select" component.
+  @observable scale = SCALES[0].value // `.value` from "react-select" component.
   @observable scaleName = SCALES[0].label // same as above ^
 
   // OmeStore functionality state
@@ -180,7 +180,7 @@ class OmeStore {
 
 
   /**
-   * @description: Called on successful access to midi object. Sets inputs and ouputs on state.
+   * @description: Try and access midi interface --> on success call `midiSuccess`
    */
   getMidiAccess = () => {
     if (navigator.requestMIDIAccess) {

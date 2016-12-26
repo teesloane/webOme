@@ -21,7 +21,7 @@ input {
 }
 
 .btn {
-  margin: 1rem;
+  margin: 1rem 0;
   padding: 1rem;
   border: 0;
   background: #efefef;

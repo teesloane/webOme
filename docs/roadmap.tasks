@@ -7,8 +7,11 @@ User Stories:
     ✔ User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. @done (12/19/2016, 6:53:31 PM)
     ✔ Create a play / pause button @done (12/19/2016, 10:02:11 PM)
     ✔ User should be able to set scale / key @high @done (12/25/2016, 11:30:56 AM)
-    ☐ Set octave
+    ✔ Set octave @done (12/25/2016, 11:27:40 PM)
     ✔ Hitting "Space" should start / stop the sequencer @done (12/25/2016, 12:41:27 PM)
+    ☐ Be able to see current step in the sequence
+    ☐ User should be able to see which note is on which btn.
+
   
   MVP-2 - Edge cases, handling errors, styling:
 

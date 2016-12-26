@@ -24,3 +24,17 @@ export const GRID = [
   { label: "1/4", value: 4 },
   { label: "1/8", value: 8 },
 ]
+
+// create a enum of midi note to scale note value.
+function MidiToNote () {
+  let midiNoteEnum = {}
+  let scaleNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+  let scaleIndex = 0
+  
+  for (let i = 0; i < 128; i++ ) {
+    let octave = Math.floor(i / 12)
+    if (scaleIndex > 11) scaleIndex = 0 
+    midiNoteEnum[i] = scaleNotes[scaleIndex] + octave
+    scaleIndex ++
+  }
+}
