@@ -12,7 +12,13 @@
 }
 
 .OmeBtn-on {
-  background: #E46843;
+  background: #3675CD;
+}
+
+.OmeBtn-on-glow {
+  background: #70A6F2;
+  box-shadow: 0px 0px 5px #3675CD;
+
 }
 
 .OmeBtn-Note-Hover {

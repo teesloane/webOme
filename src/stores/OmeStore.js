@@ -46,7 +46,7 @@ class OmeStore {
     return scaleMaker(this.key, this.scale)
   }
 
-  // something  something -- create current row thing 
+  // get row from the midiNotes data structure -- used for finding which notes to play / styling a row of btns at play time.
   @computed get currentRow() { return `row_${this.currentStep - 1}` }
 
   // calculate a final bpm time, used in a setTimeout for tempo simulation.

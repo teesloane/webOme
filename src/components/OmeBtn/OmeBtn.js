@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {observer} from 'mobx-react'
 import './OmeBtn.css';
 import OmeStore from '../../stores/OmeStore'
 import { midiToNote } from '../../music_constants/index'
 
-console.log(midiToNote)
 /**
  * @description OmeStore button. Can turn on or off.
  * Interaction: onClick -> set it's state reference to it's inverse
@@ -13,10 +12,14 @@ console.log(midiToNote)
 var OmeBtn = observer(function OmeBtn(props) {
   const {rowId, noteId} = props
   let isPlaying = OmeStore.midiNotes[rowId][noteId].isPlaying
+  let isCurrentRow = OmeStore.currentRow === props.rowId
 
   return (
     <main 
-      className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
+      className={`OmeBtn 
+        ${isPlaying ? 'OmeBtn-on' : ''}
+        ${isCurrentRow && isPlaying && OmeStore.playing ? 'OmeBtn-on-glow' : ''}
+        `}
       onClick={() => OmeStore.midiNotes[rowId][noteId].isPlaying = !OmeStore.midiNotes[rowId][noteId].isPlaying } 
     >
       <span className="OmeBtn-Note-Hover">
@@ -25,5 +28,10 @@ var OmeBtn = observer(function OmeBtn(props) {
     </main> 
   )
 })
+
+OmeBtn.propTypes = {
+  rowId: PropTypes.string,
+  noteId: PropTypes.string,
+}
 
 export default OmeBtn
