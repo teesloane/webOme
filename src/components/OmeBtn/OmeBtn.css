@@ -7,8 +7,18 @@
   border-radius: 3px;
   cursor: pointer;
   margin: 0.25rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .OmeBtn-on {
   background: #E46843;
+}
+
+.OmeBtn-Note-Hover {
+  opacity: 0;
+}
+
+.OmeBtn:hover .OmeBtn-Note-Hover{
+  opacity: 1;
 }

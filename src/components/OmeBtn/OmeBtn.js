@@ -18,7 +18,11 @@ var OmeBtn = observer(function OmeBtn(props) {
     <main 
       className={`OmeBtn ${isPlaying ? 'OmeBtn-on' : ''}`}
       onClick={() => OmeStore.midiNotes[rowId][noteId].isPlaying = !OmeStore.midiNotes[rowId][noteId].isPlaying } 
-    >{midiToNote[props.note.midiNote]}</main> 
+    >
+      <span className="OmeBtn-Note-Hover">
+        {midiToNote[props.note.midiNote].slice(0, -1)}
+      </span>
+    </main> 
   )
 })
 
