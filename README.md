@@ -16,10 +16,12 @@
 
 ## Questions
 
-- Can I contribute?
+**Can I contribute?**
+
 Yes. The wiki will (eventually) have contribution gamelines. 
 
-- Will this have `x` or `y` feature?
+**Will this have `x` or `y` feature?**
+
 Maybe. Check out the wiki, or file an issue to make any requests.  
 
 
