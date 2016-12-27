@@ -25,7 +25,7 @@ export const GRID = [
   { label: "1/8", value: 8 },
 ]
 
-// create a enum of midi note to scale note value.
+// create a enum of midi note to scale note value. ie: midiNoteEnum = {0: "C0", 1: "C#0"}
 export const midiToNote = function() {
   let midiNoteEnum = {}
   let scaleNotes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]

@@ -197,7 +197,7 @@ class OmeStore {
         .then(this.midiSuccess, () => { console.log('midi failed') });
       
     } else {
-      alert("Your browser does not support Midi. Bummer.");
+      alert("Your browser does not support Midi. Bummer. You'll need Google Chrome.");
     }
   }
 
