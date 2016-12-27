@@ -18,7 +18,7 @@
 
 **Can I contribute?**
 
-Yes. The wiki will (eventually) have contribution gamelines. 
+Yes. The wiki will (eventually) have contribution guidelines. 
 
 **Will this have `x` or `y` feature?**
 
