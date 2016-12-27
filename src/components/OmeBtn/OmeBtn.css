@@ -26,5 +26,5 @@
 }
 
 .OmeBtn:hover .OmeBtn-Note-Hover{
-  opacity: 1;
+  opacity: 0.5;
 }
