@@ -2,6 +2,7 @@ import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
+import forEach from 'lodash/forEach'
 
 class OmeStore {
   // Midi-related State
@@ -67,15 +68,14 @@ class OmeStore {
     this.playOme()
   }
 
-  // Actions
   @action togglePlay = () => { this.playing = !this.playing }
 
-  // Specifically Tailored for handling changes from react-select component.
+  // "selectXYZ" actions are Specifically tailored for handling changes from react-select component.
   @action selectGrid = (newGrid) => { this.grid = newGrid.value}
-  
+
   @action selectMidiDevice = (newDevice) => { this.selectedMidiOut = newDevice.value }
 
-  @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } // createNotes deletes sequence.
+  @action selectKey = (newKey) => { this.key = newKey.value; this.updateNotes(this.scaleNotes) } 
 
   @action incrementOctave = () => {
     if (this.octave === 2) return this.octave
@@ -100,7 +100,8 @@ class OmeStore {
     else { this.tempo = e.target.value }
   }
 
-  // "Patch Related" Methods //
+
+
 
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
@@ -113,9 +114,6 @@ class OmeStore {
       this.selectedMidiOut.send( noteOnMessage );
     })
   }
-
-
-  //Setup Methods //
 
   /**
    * @description Start the sequencer; run recursively to play notes.
@@ -133,7 +131,6 @@ class OmeStore {
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
-   * TODO: write a similar fn --> replaceNotes --> for changing key but not erasing sequence. 
    */
   createNotes = (scale) => {
     for (let i = 0; i < this.numSteps; i++) {
@@ -155,6 +152,18 @@ class OmeStore {
     }
   }
 
+
+  /**
+   * @param {array}  - arr
+   * @param {string} - keyLabel 
+   * @summary Used to create the proper data struct for a react-selector
+   * Handles input from an array of objects specifically, grabbing the selector's label to display
+   * from an object property. Mostly used to format the display of the midi outputs. 
+   */
+  createSelectorOptions(arr, keyLabel) {
+    return arr.map(item => { return { label: item[keyLabel], value: item }})
+  }
+ 
   
   /**
    * 

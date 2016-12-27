@@ -20,14 +20,7 @@ import './Menu.css';
  * @description used solely for formatting data for a react-select component. 
  */
 
-// TODO: Refactor to a computed element in the omeStore
-function createSelectorOptions(arr, labelFromObjectKey, areStrings) {
-  let n = labelFromObjectKey
-  return arr.map(item => { return { label: item[n] || "no label", value: item }})
-}
-
 const Menu = observer(function Menu(props) {
-
   // midi loads async, so wait until it's loaded until returning.
   // TODO: replace this with proper async notifier / spinner / alert.
   let selectedMidiOut = omeStore.selectedMidiOut; if (!selectedMidiOut) return null
@@ -85,7 +78,7 @@ const Menu = observer(function Menu(props) {
         <InputSelect 
           className="Select-custom"
           name="Midi Output" 
-          options={createSelectorOptions(omeStore.midiOutputs, "name")} 
+          options={omeStore.createSelectorOptions(omeStore.midiOutputs, "name")} 
           value={{label: selectedMidiOut.name, value: selectedMidiOut}}
           onChange={ omeStore.selectMidiDevice } 
           clearable={false}
