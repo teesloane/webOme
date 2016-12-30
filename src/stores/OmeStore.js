@@ -126,6 +126,11 @@ class OmeStore {
     setTimeout(() => { this.playOme() }, this.bpmTime)
   }
 
+  // TODO: send socket info.
+  toggleNote = (rowId, noteId) => {
+    this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
+  }
+
 
   /**
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`

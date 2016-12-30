@@ -20,7 +20,7 @@ var OmeBtn = observer(function OmeBtn(props) {
         ${noteOn ? 'OmeBtn-on' : ''}
         ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}
         `}
-      onClick={() => OmeStore.midiNotes[rowId][noteId].noteOn = !OmeStore.midiNotes[rowId][noteId].noteOn } 
+      onClick={() => OmeStore.toggleNote(rowId, noteId)}
     >
       <span className="OmeBtn-Note-Hover">
         {midiToNote[props.note.midiNote].slice(0, -1)}
