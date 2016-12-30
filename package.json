@@ -57,7 +57,8 @@
     "note-parser": "^2.0.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-select": "^1.0.0-rc.2"
+    "react-select": "^1.0.0-rc.2",
+    "socket.io-client": "^1.7.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
