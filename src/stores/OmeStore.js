@@ -1,4 +1,4 @@
-import { observable, computed, extendObservable, action } from 'mobx'
+import { observable, computed, extendObservable, action, autorun } from 'mobx'
 import io from 'socket.io-client'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
@@ -151,17 +151,20 @@ class OmeStore {
    */
   createNotes = (scale) => {
     for (let i = 0; i < this.numSteps; i++) {
-      let newOmeRow = {}
-      newOmeRow[`row_${i}`] = {}
+      let newOmeRow = {
+        [`row_${i}`]: {}
+      }
+      
       extendObservable(this.midiNotes, newOmeRow)
       
       // create the buttons to fill the newRow above^
       for (let j = 0; j < scale.length; j++) {
-        let newOmeBtn = {}
-        newOmeBtn[`button_${j}`] = {
-          id: `button_${j}`,
-          midiNote: parser.midi(scale[j]), 
-          noteOn: false
+        let newOmeBtn = {
+          [`button_${j}`]: {
+            id: `button_${j}`,
+            midiNote: parser.midi(scale[j]), 
+            noteOn: false
+          }
         }
 
         extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)
