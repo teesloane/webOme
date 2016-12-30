@@ -140,9 +140,7 @@ class OmeStore {
   }
 
   receiveSocketNotes = (rowId, noteId) => {
-    console.log(this.midiNotes);
-    console.log(rowId, noteId);
-    // this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
+    this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
   }
 
 
