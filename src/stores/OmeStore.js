@@ -1,10 +1,18 @@
 import { observable, computed, extendObservable, action } from 'mobx'
+import io from 'socket.io-client'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 import forEach from 'lodash/forEach'
 
+const SERVER_IP = "http://benevolent.ninja:5001"
+
 class OmeStore {
+
+  // unchanging things that don't need to be observable?
+  socket = io(SERVER_IP)
+
+
   // Midi-related State
   @observable midiNotes = {}
   @observable midi = undefined
@@ -126,9 +134,15 @@ class OmeStore {
     setTimeout(() => { this.playOme() }, this.bpmTime)
   }
 
-  // TODO: send socket info.
   toggleNote = (rowId, noteId) => {
     this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
+    this.socket.emit('client::note', { rowId, noteId }) // send notes down socket. 
+  }
+
+  receiveSocketNotes = (rowId, noteId) => {
+    console.log(this.midiNotes);
+    console.log(rowId, noteId);
+    // this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
   }
 
 

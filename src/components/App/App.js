@@ -16,6 +16,11 @@ class App extends Component {
     document.addEventListener('keydown', (e) => {
       if (e.code === "Space") OmeStore.togglePlay()
     })
+
+    // set up socket listener for note info.
+    OmeStore.socket.on(`server::note`, data => {
+      OmeStore.receiveSocketNotes(data.rowId, data.noteId)
+    })
   }
 
   /* render row + pass array of buttons */
