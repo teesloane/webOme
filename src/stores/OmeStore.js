@@ -53,10 +53,10 @@ class OmeStore {
   // calculate a final bpm time, used in a setTimeout for tempo simulation.
   @computed get bpmTime() { return 60 / this.tempo * 1000 / this.grid}
 
-  // gets all notes that are "isPlaying" from currentStep , send to playNote
+  // gets all notes that are "noteOn" from currentStep , send to playNote
   @computed get onNotes() {
     return Object.keys(this.midiNotes[this.currentRow]).filter((note) => {
-      return this.midiNotes[this.currentRow][note].isPlaying === true
+      return this.midiNotes[this.currentRow][note].noteOn === true
     })
   }
 
@@ -144,7 +144,7 @@ class OmeStore {
         newOmeBtn[`button_${j}`] = {
           id: `button_${j}`,
           midiNote: parser.midi(scale[j]), 
-          isPlaying: false
+          noteOn: false
         }
 
         extendObservable(this.midiNotes[`row_${i}`], newOmeBtn)

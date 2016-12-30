@@ -11,16 +11,16 @@ import { midiToNote } from '../../music_constants/index'
  */
 var OmeBtn = observer(function OmeBtn(props) {
   const {rowId, noteId} = props
-  let isPlaying = OmeStore.midiNotes[rowId][noteId].isPlaying
+  let noteOn = OmeStore.midiNotes[rowId][noteId].noteOn
   let isCurrentRow = OmeStore.currentRow === props.rowId
 
   return (
     <main 
       className={`OmeBtn 
-        ${isPlaying ? 'OmeBtn-on' : ''}
-        ${isCurrentRow && isPlaying && OmeStore.playing ? 'OmeBtn-on-glow' : ''}
+        ${noteOn ? 'OmeBtn-on' : ''}
+        ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}
         `}
-      onClick={() => OmeStore.midiNotes[rowId][noteId].isPlaying = !OmeStore.midiNotes[rowId][noteId].isPlaying } 
+      onClick={() => OmeStore.midiNotes[rowId][noteId].noteOn = !OmeStore.midiNotes[rowId][noteId].noteOn } 
     >
       <span className="OmeBtn-Note-Hover">
         {midiToNote[props.note.midiNote].slice(0, -1)}
