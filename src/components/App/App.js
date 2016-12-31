@@ -18,7 +18,7 @@ class App extends Component {
     })
 
     // set up socket listener for note info.
-    OmeStore.socket.on(`server::note`, data => {
+    OmeStore.enableSockets && OmeStore.socket.on(`server::note`, data => {
       OmeStore.receiveSocketNotes(data.rowId, data.noteId)
     })
   }

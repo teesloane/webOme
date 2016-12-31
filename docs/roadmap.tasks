@@ -1,3 +1,8 @@
+Things:
+  ☐ handle having no midi devices
+  ☐ Include sockets in develop with a flag set to off. 
+
+
 User Stories: 
   MVP:
     ☐ User should be able to sequence external midi gear ( need gear to test on )

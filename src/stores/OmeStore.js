@@ -1,17 +1,13 @@
-import { observable, computed, extendObservable, action, autorun } from 'mobx'
+import { observable, computed, extendObservable, action } from 'mobx'
 import io from 'socket.io-client'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
-import forEach from 'lodash/forEach'
 
-const SERVER_IP = "http://benevolent.ninja:5001"
+const SERVER_IP = "42"
 
 class OmeStore {
-
-  // unchanging things that don't need to be observable?
-  socket = io(SERVER_IP)
-
+  enableSockets = true;
 
   // Midi-related State
   @observable midiNotes = {}
@@ -74,6 +70,10 @@ class OmeStore {
     this.getMidiAccess()
     this.createNotes(this.scaleNotes)
     this.playOme()
+
+    if (this.enableSockets) {
+      this.socket = io(SERVER_IP)
+    }
   }
 
   @action togglePlay = () => { this.playing = !this.playing }
@@ -109,8 +109,6 @@ class OmeStore {
   }
 
 
-
-
   /**
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
@@ -136,7 +134,7 @@ class OmeStore {
 
   toggleNote = (rowId, noteId) => {
     this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
-    this.socket.emit('client::note', { rowId, noteId }) // send notes down socket. 
+    this.enableSockets && this.socket.emit('client::note', { rowId, noteId }) // send notes down socket. 
   }
 
   receiveSocketNotes = (rowId, noteId) => {
