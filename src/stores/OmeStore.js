@@ -2,7 +2,6 @@ import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
-import forEach from 'lodash/forEach'
 
 class OmeStore {
   // Midi-related State

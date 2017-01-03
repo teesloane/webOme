@@ -14,8 +14,11 @@ export const KEYS_SELECTOR = [
 ]
 
 export const SCALES = [
-  { label: "Major", value: [2, 2, 1, 2, 2, 2, 1] },
-  { label: 'Minor', value: [2, 1, 2, 2, 1, 2, 2] },
+  { label: "Major",            value: [2, 2, 1, 2, 2, 2, 1] },
+  { label: 'Natural Minor',    value: [2, 1, 2, 2, 1, 2, 2] },
+  { label: 'Harmonic Minor',   value: [2, 1, 2, 2, 1, 2, 2] },
+  { label: 'Dorian',           value: [2, 1, 2, 2, 2, 1, 2] },
+  { label: 'Mixolydian',       value: [2, 1, 2, 2, 1, 3, 1] },
 ]
 
 export const GRID = [
