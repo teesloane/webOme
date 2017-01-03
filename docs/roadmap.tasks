@@ -11,10 +11,13 @@ User Stories:
     ✔ Hitting "Space" should start / stop the sequencer @done (12/25/2016, 12:41:27 PM)
     ✔ Be able to see current step in the sequence @done (12/26/2016, 2:18:13 PM)
     ✔ User should be able to see which note is on which btn. @done (12/26/2016, 1:06:43 PM)
-
   
   MVP-2 - Edge cases, handling errors, styling:
 
+  Bugs:
+    ☐ Handle forever midi notes on tab close
+    ☐ Handle disconnected midi device.
+    
   Advanced Features:
     ☐ Make it possible to change the note for a row in the standard sequencer mode. 
     ☐ User should be able to choose from more than one "patch" for sequencing (boingg, polygnome, game of life etc)
@@ -23,7 +26,6 @@ User Stories:
     ☐ Each OmeBtn can have it's own velocity, gate, pitch, etc. 
     ☐ Sequence "banks" for switching on the fly. 
     ☐ Tap tempo 
-    ☐ Handle disconnected midi device.
 
 Sequencer Builds: 
   Standard sequencer (left to right step by step):  
