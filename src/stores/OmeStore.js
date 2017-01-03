@@ -207,6 +207,11 @@ class OmeStore {
    */
   midiSuccess = (midiAccess) => {
     // midiAccess.outputs is a MAP --> hence grabbing [1] and not [0].
+    if (midiAccess.outputs.size < 1) {
+      alert("You don't have any midi devices. Plug in a Midi Device to use webOme!" )
+    }
+    
+
     for (let midiOutput of midiAccess.outputs) { this.midiOutputs.push(midiOutput[1]) }
     for (let midiInput of midiAccess.inputs) { this.midiInputs.push(midiInput[1]) }
 

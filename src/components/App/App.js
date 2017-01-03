@@ -24,10 +24,10 @@ class App extends Component {
   render() {
     let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
     let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
-
+    let isDev = process.env.NODE_ENV === "development";
     return (
       <div className="App">
-        <DevTools />
+        { isDev && <DevTools /> }
 
         {/* Menu + Toggle */}
         <Menu />
