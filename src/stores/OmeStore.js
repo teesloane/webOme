@@ -2,6 +2,7 @@ import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
+import uiStore from './UiStore';
 
 class OmeStore {
   // Midi-related State
@@ -208,7 +209,7 @@ class OmeStore {
   midiSuccess = (midiAccess) => {
     // midiAccess.outputs is a MAP --> hence grabbing [1] and not [0].
     if (midiAccess.outputs.size < 1) {
-      alert("You don't have any midi devices. Plug in a Midi Device to use webOme!" )
+      uiStore.showModal("You don't have any midi devices! Sadly WebOme cannot function without some cool doo-dad midi devices along-side it.")
     }
     
 

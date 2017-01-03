@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import map from 'lodash/map'
 import DevTools from 'mobx-react-devtools';
+import Modal from 'react-modal';
 
 import OmeRow from '../OmeRow/OmeRow'
 import Menu from '../Menu/Menu';
@@ -25,9 +26,22 @@ class App extends Component {
     let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
     let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
     let isDev = process.env.NODE_ENV === "development";
+
     return (
       <div className="App">
         { isDev && <DevTools /> }
+
+        {/* Modals -- All / Any modal is programtically displayed here via UiStore */}
+        <Modal 
+          isOpen={UiStore.modal.show}
+          className="App-modal-content"
+          overlayClassName="App-modal-overlay"
+        >
+          <section className="App-modal-body">
+            <button onClick={() => UiStore.closeModal()} className="App-modal-close">x</button>
+            {UiStore.modal.body}
+          </section>
+        </Modal>
 
         {/* Menu + Toggle */}
         <Menu />
