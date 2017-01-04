@@ -19,6 +19,8 @@ const InputSelect = function(props) {
         clearable={props.clearable}
         deleteRemoves={false}
         backspaceRemoves={false}
+        placeholder={props.placeholder}
+        disabled={props.disabled}
     />
     </main>
   );
@@ -29,6 +31,8 @@ InputSelect.propTypes = {
   value: PropTypes.any,
   options: PropTypes.array,
   onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default InputSelect
