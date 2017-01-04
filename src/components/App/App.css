@@ -63,7 +63,7 @@
 .App-modal-content {
   background: rgb(250, 250, 250);
   position: relative;
-  width: 50%;
+  max-width: 600px;
   height: 350px;
   outline: none;
   display: flex;
@@ -72,13 +72,35 @@
   align-items: center;
   padding: 2rem;
   text-align: center;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .App-modal-close {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 10px;
+  margin: 10px;
+  padding: 0.7rem 1rem;
+  background: #777;
+  border: none;
+  border-radius: 10%;
+  color: white;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.App-modal-close:hover  {
+  background: #888;
+  border: none;
+  border-radius: 30%;
+  color: white;
+}
+
+.App-modal-close:active  {
+  background: #999;
+  border: none;
+  border-radius: 50%;
+  color: white;
 }
 
 .App-modal-body {

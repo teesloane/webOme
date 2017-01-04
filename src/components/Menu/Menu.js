@@ -23,7 +23,7 @@ import './Menu.css';
 const Menu = observer(function Menu(props) {
   // midi loads async, so wait until it's loaded until returning.
   // TODO: replace this with proper async notifier / spinner / alert.
-  let selectedMidiOut = omeStore.selectedMidiOut; if (!selectedMidiOut) return null
+  if (!omeStore.midi) return null
 
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
@@ -74,17 +74,23 @@ const Menu = observer(function Menu(props) {
       </section>
 
       {/*Section: Midi Setup */}
-      <section className="Menu-section">
-        <InputSelect 
-          className="Select-custom"
-          name="Midi Output" 
-          options={omeStore.createSelectorOptions(omeStore.midiOutputs, "name")} 
-          value={{label: selectedMidiOut.name, value: selectedMidiOut}}
-          onChange={ omeStore.selectMidiDevice } 
-          clearable={false}
-          deleteRemoves={false}
-        />
-      </section>
+      {
+        omeStore.selectedMidiOut ? 
+        <section className="Menu-section">
+          <InputSelect 
+            className="Select-custom"
+            name="Midi Output" 
+            options={omeStore.createSelectorOptions(omeStore.midiOutputs, "name")} 
+            value={{label: omeStore.selectedMidiOut.name, value: omeStore.selectedMidiOut}}
+            onChange={ omeStore.selectMidiDevice } 
+            clearable={false}
+            deleteRemoves={false}
+          />
+        </section> :
+
+        <section><InputSelect placeholder="No Midi Devices Available" disabled /></section>
+      }
+
     </main>
   );
 });

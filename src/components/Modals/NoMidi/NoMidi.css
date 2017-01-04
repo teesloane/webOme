@@ -1,0 +1,19 @@
+.NoMidi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.NoMidi-text {
+  font-size: 1.6rem;
+  margin: 2rem 0;
+}
+
+.NoMidi-image-carousel {
+  background-image: url('./assets/synth3.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 300px;
+  height: 200px;
+}

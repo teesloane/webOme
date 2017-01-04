@@ -3,9 +3,9 @@ import './Template.css';
 
 const Template = props => {
   return (
-    <main className="Template">
+    <div className="Template">
       
-    </main>
+    </div>
   );
 };
 

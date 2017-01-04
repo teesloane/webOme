@@ -1,8 +1,10 @@
+import React from 'react'
 import { observable, computed, extendObservable, action } from 'mobx'
 import parser from 'note-parser'
 import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 import uiStore from './UiStore';
+import NoMidi from '../components/Modals/NoMidi/NoMidi';
 
 class OmeStore {
   // Midi-related State
@@ -107,7 +109,7 @@ class OmeStore {
    * @description "collects" notes using "onNotes" which returns an array. Output midi note forEach note.
    */
   playNote = () => {
-    if (!this.playing) return
+    if (!this.playing || !this.selectedMidiOut) return
     this.onNotes.forEach(note => {
       let noteToPlay = this.midiNotes[this.currentRow][note].midiNote + (this.octave * 12)
       var noteOnMessage = [0x90, noteToPlay , 0x7f];  
@@ -209,7 +211,7 @@ class OmeStore {
   midiSuccess = (midiAccess) => {
     // midiAccess.outputs is a MAP --> hence grabbing [1] and not [0].
     if (midiAccess.outputs.size < 1) {
-      uiStore.showModal("You don't have any midi devices! Sadly WebOme cannot function without some cool doo-dad midi devices along-side it.")
+      uiStore.showModal(<NoMidi />)
     }
     
 

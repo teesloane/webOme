@@ -31,14 +31,14 @@ class App extends Component {
       <div className="App">
         { isDev && <DevTools /> }
 
-        {/* Modals -- All / Any modal is programtically displayed here via UiStore */}
-        <Modal 
-          isOpen={UiStore.modal.show}
+        {/* Modals -- All / Any modal is programtically displayed here via UiStore actions */}
+        <Modal isOpen={UiStore.modal.show}
           className="App-modal-content"
           overlayClassName="App-modal-overlay"
+          contentLabel="Modal"
         >
           <section className="App-modal-body">
-            <button onClick={() => UiStore.closeModal()} className="App-modal-close">x</button>
+            <button onClick={() => UiStore.closeModal()} className="App-modal-close">X</button>
             {UiStore.modal.body}
           </section>
         </Modal>
