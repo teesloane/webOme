@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import './NoMidi.css';
 
 const NoMidi = props => {
