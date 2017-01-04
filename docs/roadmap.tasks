@@ -15,8 +15,8 @@ MVP-2 - Edge cases, handling errors, styling:
 
   styling:
     ☐ Create button component
-    ☐ Incorporate Roboto font from google fonts
-    ☐ Animate the menu in/out
+    ✔ Incorporate new font from google fonts @done (2017-01-04, 11:19:17 AM)
+    ✔ Animate the menu in/out @done (2017-01-04, 11:32:37 AM)
 
   Bugs:
     ☐ Handle forever midi notes on tab close

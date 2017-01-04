@@ -4,11 +4,12 @@
   flex-direction: column;
   max-width: 250px;
   padding: 1rem;
-  flex: 1
+  flex: 1;
+  transition: all 0.4s ease-in-out;
 }
 
 .Menu--hide {
-  display: none;
+  margin-left: calc(-250px - 2rem);
 }
 
 .Menu-section {
