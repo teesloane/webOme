@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 
 import UiStore from '../../stores/UiStore'
 import InputNumber from '../UiKit/InputNumber/InputNumber'
@@ -9,16 +9,8 @@ import omeStore from '../../stores/OmeStore';
 import {KEYS_SELECTOR, SCALES, GRID} from '../../music_constants'
 import './Menu.css';
 
-/**
- * 
- * @param {array} arr - the array to be transformed into an array of objects.
- * @param {string} labelFromObjectKey - used to give name to the label, if the object has something worth pulling from as a name.
- * @param {bool} For handling arrays of just strings that need to become selectors. TODO: refactor this to type checks?
- * @returns an array of objects where each array item has a "label" and the value (which is the iterated item)
- * @description used solely for formatting data for a react-select component. 
- */
 
-const Menu = observer(function Menu(props) {
+const Menu = function Menu(props) {
   // midi loads async, so wait until it's loaded until returning.
   // TODO: replace this with proper async notifier / spinner / alert.
   if (!omeStore.midi) return null
@@ -91,11 +83,11 @@ const Menu = observer(function Menu(props) {
 
     </main>
   );
-});
+};
 
 Menu.propTypes = {
   isOpen: PropTypes.bool,
 };
 
 
-export default Menu;
+export default inject('omeStore', 'uiStore')(observer(Menu));
