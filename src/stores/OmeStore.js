@@ -6,6 +6,8 @@ import { SCALES } from '../music_constants'
 import uiStore from './UiStore';
 import NoMidi from '../components/Modals/NoMidi/NoMidi';
 
+// TODO: pressing "Play" should reset `this.currentStep` to 0.
+
 export class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
@@ -100,6 +102,10 @@ export class OmeStore {
     if (newTempo < 10) { this.tempo = 10 }
     else if (newTempo > 240) { this.tempo = 240 }
     else { this.tempo = e.target.value }
+  }
+
+  @action toggleOmeBtn = (rowId, noteId) => {
+    this.midiNotes[rowId][noteId].noteOn = !this.midiNotes[rowId][noteId].noteOn
   }
 
 
