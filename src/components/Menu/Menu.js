@@ -9,8 +9,6 @@ import omeStore from '../../stores/OmeStore';
 import {KEYS_SELECTOR, SCALES, GRID} from '../../music_constants'
 import './Menu.css';
 
-
-
 /**
  * 
  * @param {array} arr - the array to be transformed into an array of objects.
