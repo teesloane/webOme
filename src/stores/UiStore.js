@@ -1,6 +1,6 @@
 import { observable, action} from 'mobx'
 
- class UiStore {
+ export class UiStore {
 
   @observable modal = {
     show: false,

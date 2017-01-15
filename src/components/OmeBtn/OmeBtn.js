@@ -1,37 +1,36 @@
 import React, { PropTypes } from 'react';
-import {observer} from 'mobx-react'
-import './OmeBtn.css';
-import OmeStore from '../../stores/OmeStore'
+import {observer, inject} from 'mobx-react'
 import { midiToNote } from '../../music_constants/index'
+import './OmeBtn.css';
 
 /**
  * @description OmeStore button. Can turn on or off.
  * Interaction: onClick -> set it's state reference to it's inverse
  * TODO: Probably should refactor the onClick this to a method on the OmeStore class.
  */
-var OmeBtn = observer(function OmeBtn(props) {
-  const {rowId, noteId} = props
-  let noteOn = OmeStore.midiNotes[rowId][noteId].noteOn
-  let isCurrentRow = OmeStore.currentRow === props.rowId
+
+const OmeBtn = function OmeBtn(props) {
+  const {rowId, noteId, OmeStore} = props
+  const noteOn = OmeStore.midiNotes[rowId][noteId].noteOn
+  const isCurrentRow = OmeStore.currentRow === props.rowId
+  const noteValue = midiToNote[props.note.midiNote].slice(0,-1) // get note name to display on hover. 
+  const classNames = () => (
+    `OmeBtn 
+     ${noteOn ? 'OmeBtn-on' : ''} 
+     ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}`
+  )
 
   return (
-    <main 
-      className={`OmeBtn 
-        ${noteOn ? 'OmeBtn-on' : ''}
-        ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}
-        `}
-      onClick={() => OmeStore.midiNotes[rowId][noteId].noteOn = !OmeStore.midiNotes[rowId][noteId].noteOn } 
-    >
-      <span className="OmeBtn-Note-Hover">
-        {midiToNote[props.note.midiNote].slice(0, -1)}
-      </span>
-    </main> 
+    <div className={classNames()} onClick={() => OmeStore.toggleOmeBtn(rowId, noteId)}>
+      <span className="OmeBtn-Note-Hover">{noteValue}</span>
+    </div> 
   )
-})
+}
 
 OmeBtn.propTypes = {
   rowId: PropTypes.string,
   noteId: PropTypes.string,
+  OmeStore: PropTypes.object,
 }
 
-export default OmeBtn
+export default inject('OmeStore')(observer(OmeBtn));

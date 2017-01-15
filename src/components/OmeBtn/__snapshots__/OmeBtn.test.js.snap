@@ -1,4 +1,4 @@
-exports[`Menu Component matches snapshot 1`] = `
+exports[`omeBtn component matches snapshot 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -6,13 +6,11 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <Menu
-    OmeStore={Object {}}
-    UiStore={Object {}} />,
+  "node": <OmeBtn
+    OmeStore={undefined} />,
   "nodes": Array [
-    <Menu
-      OmeStore={Object {}}
-      UiStore={Object {}} />,
+    <OmeBtn
+      OmeStore={undefined} />,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -20,9 +18,8 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <inject-Menu-with-OmeStore-UiStore
-        OmeStore={Object {}}
-        UiStore={Object {}} />,
+      "_currentElement": <inject-OmeBtn-with-OmeStore
+        OmeStore={undefined} />,
       "_debugID": 3,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -32,8 +29,7 @@ ShallowWrapper {
           "mobxStores": undefined,
         },
         "props": Object {
-          "OmeStore": Object {},
-          "UiStore": Object {},
+          "OmeStore": undefined,
         },
         "refs": Object {},
         "state": null,
@@ -56,13 +52,11 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <Menu
-          OmeStore={Object {}}
-          UiStore={Object {}} />,
+        "_currentElement": <OmeBtn
+          OmeStore={undefined} />,
         "_debugID": 4,
-        "_renderedOutput": <Menu
-          OmeStore={Object {}}
-          UiStore={Object {}} />,
+        "_renderedOutput": <OmeBtn
+          OmeStore={undefined} />,
       },
       "_renderedNodeType": 1,
       "_rootNodeID": 0,
@@ -74,8 +68,7 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <inject-Menu-with-OmeStore-UiStore
-    OmeStore={Object {}}
-    UiStore={Object {}} />,
+  "unrendered": <inject-OmeBtn-with-OmeStore
+    OmeStore={undefined} />,
 }
 `;

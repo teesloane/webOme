@@ -1,31 +1,40 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import map from 'lodash/map'
 import DevTools from 'mobx-react-devtools';
 import Modal from 'react-modal';
-
 import OmeRow from '../OmeRow/OmeRow'
 import Menu from '../Menu/Menu';
-import UiStore from '../../stores/UiStore'
-import OmeStore from '../../stores/OmeStore'
 import './App.css';
 
 
-@observer
+/**
+ * @summary: Renders the entire application. 
+ * - All state is passed through `Provider` via `mobx-react`. This must be injected as needed.
+ * - Adds listener for "space" to pause and play music.
+ * - Also, all Modals are displayed through <App>. Logic is handled in the UiStore.
+ * @returns: Spits out the App with a Menu, and the main "Monome"" grid.
+ * @class App
+ * @extends {Component}
+ * TODO: Refactor "Play / Pause" to it's own component. The logic for the text it renders is ugly. 
+ */
+@inject('UiStore', 'OmeStore') @observer
 class App extends Component {
+
   componentDidMount() {
     document.addEventListener('keydown', (e) => {
-      if (e.code === "Space") OmeStore.togglePlay()
+      if (e.code === "Space") this.props.OmeStore.togglePlay()
     })
   }
 
   /* render row + pass array of buttons */
-  renderMidiRow = () => map(OmeStore.midiNotes, (row, k) => <OmeRow key={k} rowId={k} notes={row} /> )
+  renderMidiRow = () => map(this.props.OmeStore.midiNotes, (row, k) => <OmeRow key={k} rowId={k} notes={row} /> )
 
   render() {
+    const {OmeStore, UiStore} = this.props
+    let isDev = process.env.NODE_ENV === "development";
     let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
     let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
-    let isDev = process.env.NODE_ENV === "development";
 
     return (
       <div className="App">
