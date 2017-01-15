@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react';
-import {observer} from 'mobx-react'
+import {observer, inject} from 'mobx-react'
 import './InputNumber.css';
-import omeStore from '../../../stores/OmeStore';
 
-const InputNumber = observer(function(props) {
+const InputNumber = function(props) {
+  const {OmeStore, max, min, id, label} = props;
+
   return (
     <main className="InputNumber">
-      <label className="label-standard" htmlFor={props.id}>{props.label}</label>
-      <input id={props.id} type="number" min={props.min} max={props.max} onChange={omeStore.changeTempo} value={omeStore.tempo} />
+      <label className="label-standard" htmlFor={id}>{label}</label>
+      <input id={id} type="number" min={min} max={max} onChange={OmeStore.changeTempo} value={OmeStore.tempo} />
     </main>
   );
-});
+};
 
 InputNumber.propTypes = {
   id: PropTypes.string,
@@ -18,4 +19,4 @@ InputNumber.propTypes = {
   value: PropTypes.number,
 };
 
-export default InputNumber
+export default inject('OmeStore')(observer(InputNumber))
