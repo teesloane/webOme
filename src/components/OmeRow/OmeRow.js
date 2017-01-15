@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import './OmeRow.css';
 import OmeBtn from '../OmeBtn/OmeBtn';
+import './OmeRow.css';
 
 const OmeRow = props => {
   let notes = Object.keys(props.notes);

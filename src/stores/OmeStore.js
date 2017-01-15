@@ -6,7 +6,7 @@ import { SCALES } from '../music_constants'
 import uiStore from './UiStore';
 import NoMidi from '../components/Modals/NoMidi/NoMidi';
 
-class OmeStore {
+export class OmeStore {
   // Midi-related State
   @observable midiNotes = {}
   @observable midi = undefined
