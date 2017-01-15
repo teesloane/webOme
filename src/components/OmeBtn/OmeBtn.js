@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import {observer, inject} from 'mobx-react'
-import './OmeBtn.css';
-// import OmeStore from '../../stores/OmeStore'
 import { midiToNote } from '../../music_constants/index'
+import './OmeBtn.css';
 
 /**
  * @description OmeStore button. Can turn on or off.

@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react'
 import { observer, inject } from 'mobx-react'
-
-// import UiStore from '../../stores/UiStore'
 import InputNumber from '../UiKit/InputNumber/InputNumber'
 import InputSelect from '../UiKit/InputSelect/InputSelect';
-// import OmeStore from '../../stores/OmeStore';
-
 import {KEYS_SELECTOR, SCALES, GRID} from '../../music_constants'
 import './Menu.css';
 

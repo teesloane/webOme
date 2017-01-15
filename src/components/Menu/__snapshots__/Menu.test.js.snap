@@ -6,9 +6,13 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": null,
+  "node": <Menu
+    OmeStore={Object {}}
+    UiStore={Object {}} />,
   "nodes": Array [
-    null,
+    <Menu
+      OmeStore={Object {}}
+      UiStore={Object {}} />,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -16,17 +20,24 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <Menu />,
+      "_currentElement": <inject-Menu-with-OmeStore-UiStore
+        OmeStore={Object {}}
+        UiStore={Object {}} />,
       "_debugID": 3,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance":  {
         "_reactInternalInstance": [Circular],
-        "context": Object {},
-        "props": Object {},
+        "context": Object {
+          "mobxStores": undefined,
+        },
+        "props": Object {
+          "OmeStore": Object {},
+          "UiStore": Object {},
+        },
         "refs": Object {},
-        "render": [Function],
         "state": null,
+        "storeRef": [Function],
         "updater": Object {
           "enqueueCallback": [Function],
           "enqueueCallbackInternal": [Function],
@@ -45,11 +56,15 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": null,
+        "_currentElement": <Menu
+          OmeStore={Object {}}
+          UiStore={Object {}} />,
         "_debugID": 4,
-        "_renderedOutput": null,
+        "_renderedOutput": <Menu
+          OmeStore={Object {}}
+          UiStore={Object {}} />,
       },
-      "_renderedNodeType": 2,
+      "_renderedNodeType": 1,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,
@@ -59,6 +74,8 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Menu />,
+  "unrendered": <inject-Menu-with-OmeStore-UiStore
+    OmeStore={Object {}}
+    UiStore={Object {}} />,
 }
 `;

@@ -2,15 +2,15 @@ import OmeBtn from './OmeBtn'
 
 describe('omeBtn component', function() {
   beforeEach(function() {
-    this.omeStore = {}
+    this.OmeStore = {}
   })
 
   it('renders', () => {
-    shallow(<OmeBtn omeStore={this.omeStore} />);
+    shallow(<OmeBtn OmeStore={this.omeStore} />);
   })
 
   it('matches snapshot', () => {
-    const component = shallow(<OmeBtn omeStore={this.omeStore} />);
+    const component = shallow(<OmeBtn OmeStore={this.omeStore} />);
     expect(component).toMatchSnapshot();
   })
 

@@ -7,10 +7,10 @@ ShallowWrapper {
   },
   "length": 1,
   "node": <OmeBtn
-    omeStore={undefined} />,
+    OmeStore={undefined} />,
   "nodes": Array [
     <OmeBtn
-      omeStore={undefined} />,
+      OmeStore={undefined} />,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -18,8 +18,8 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <inject-OmeBtn-with-omeStore
-        omeStore={undefined} />,
+      "_currentElement": <inject-OmeBtn-with-OmeStore
+        OmeStore={undefined} />,
       "_debugID": 3,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -29,7 +29,7 @@ ShallowWrapper {
           "mobxStores": undefined,
         },
         "props": Object {
-          "omeStore": undefined,
+          "OmeStore": undefined,
         },
         "refs": Object {},
         "state": null,
@@ -53,10 +53,10 @@ ShallowWrapper {
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <OmeBtn
-          omeStore={undefined} />,
+          OmeStore={undefined} />,
         "_debugID": 4,
         "_renderedOutput": <OmeBtn
-          omeStore={undefined} />,
+          OmeStore={undefined} />,
       },
       "_renderedNodeType": 1,
       "_rootNodeID": 0,
@@ -68,7 +68,7 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <inject-OmeBtn-with-omeStore
-    omeStore={undefined} />,
+  "unrendered": <inject-OmeBtn-with-OmeStore
+    OmeStore={undefined} />,
 }
 `;
