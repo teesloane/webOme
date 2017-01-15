@@ -17,6 +17,7 @@ ShallowWrapper {
          cannot function without some cool doo-dad midi devices along-side it.
     </div>
     <img
+        alt=""
         className="NoMidi-image-synth"
         src="test-file-stub" />
 </div>,
@@ -32,6 +33,7 @@ ShallowWrapper {
              cannot function without some cool doo-dad midi devices along-side it.
       </div>
       <img
+            alt=""
             className="NoMidi-image-synth"
             src="test-file-stub" />
 </div>,
@@ -81,6 +83,7 @@ ShallowWrapper {
                      cannot function without some cool doo-dad midi devices along-side it.
           </div>
           <img
+                    alt=""
                     className="NoMidi-image-synth"
                     src="test-file-stub" />
 </div>,
@@ -96,6 +99,7 @@ ShallowWrapper {
                      cannot function without some cool doo-dad midi devices along-side it.
           </div>
           <img
+                    alt=""
                     className="NoMidi-image-synth"
                     src="test-file-stub" />
 </div>,
