@@ -8,7 +8,7 @@ ShallowWrapper {
   "length": 1,
   "node": <main
     className="OmeRow">
-    <OmeBtn
+    <inject-OmeBtn-with-omeStore
         note={
             Object {
                 "id": "button_0",
@@ -22,7 +22,7 @@ ShallowWrapper {
   "nodes": Array [
     <main
       className="OmeRow">
-      <OmeBtn
+      <inject-OmeBtn-with-omeStore
             note={
                   Object {
                         "id": "button_0",
@@ -87,7 +87,7 @@ ShallowWrapper {
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <main
           className="OmeRow">
-          <OmeBtn
+          <inject-OmeBtn-with-omeStore
                     note={
                               Object {
                                         "id": "button_0",
@@ -101,7 +101,7 @@ ShallowWrapper {
         "_debugID": 4,
         "_renderedOutput": <main
           className="OmeRow">
-          <OmeBtn
+          <inject-OmeBtn-with-omeStore
                     note={
                               Object {
                                         "id": "button_0",

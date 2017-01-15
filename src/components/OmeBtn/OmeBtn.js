@@ -14,7 +14,7 @@ const OmeBtn = function OmeBtn(props) {
   const {rowId, noteId, omeStore} = props
   const noteOn = omeStore.midiNotes[rowId][noteId].noteOn
   const isCurrentRow = omeStore.currentRow === props.rowId
-  const noteValue = midiToNote[props.note.midiNote].slice(0,-1); // get note name to display on hover. 
+  const noteValue = midiToNote[props.note.midiNote].slice(0,-1) // get note name to display on hover. 
   const classNames = () => (
     `OmeBtn 
      ${noteOn ? 'OmeBtn-on' : ''} 
@@ -31,6 +31,7 @@ const OmeBtn = function OmeBtn(props) {
 OmeBtn.propTypes = {
   rowId: PropTypes.string,
   noteId: PropTypes.string,
+  omeStore: PropTypes.object,
 }
 
 export default inject('omeStore')(observer(OmeBtn));
