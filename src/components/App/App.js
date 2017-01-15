@@ -18,23 +18,23 @@ import './App.css';
  * @extends {Component}
  * TODO: Refactor "Play / Pause" to it's own component. The logic for the text it renders is ugly. 
  */
-@inject('uiStore', 'omeStore') @observer
+@inject('UiStore', 'OmeStore') @observer
 class App extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', (e) => {
-      if (e.code === "Space") this.props.omeStore.togglePlay()
+      if (e.code === "Space") this.props.OmeStore.togglePlay()
     })
   }
 
   /* render row + pass array of buttons */
-  renderMidiRow = () => map(this.props.omeStore.midiNotes, (row, k) => <OmeRow key={k} rowId={k} notes={row} /> )
+  renderMidiRow = () => map(this.props.OmeStore.midiNotes, (row, k) => <OmeRow key={k} rowId={k} notes={row} /> )
 
   render() {
-    const {omeStore, uiStore} = this.props
+    const {OmeStore, UiStore} = this.props
     let isDev = process.env.NODE_ENV === "development";
-    let PlayBtnCl = omeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
-    let PlayBtnText = omeStore.playing ? 'Pause' : 'Play' 
+    let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
+    let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
 
     return (
       <div className="App">
@@ -42,26 +42,26 @@ class App extends Component {
 
         {/* Modals -- All / Any modal is programtically displayed here via UiStore actions */}
         <Modal 
-          isOpen={uiStore.modal.show}
+          isOpen={UiStore.modal.show}
           className="App-modal-content"
           overlayClassName="App-modal-overlay"
           contentLabel="Modal"
-          onRequestClose={() => uiStore.closeModal()}
+          onRequestClose={() => UiStore.closeModal()}
         >
           <section className="App-modal-body">
-            <button onClick={() => uiStore.closeModal()} className="App-modal-close">X</button>
-            {uiStore.modal.body}
+            <button onClick={() => UiStore.closeModal()} className="App-modal-close">X</button>
+            {UiStore.modal.body}
           </section>
         </Modal>
 
         {/* Menu + Toggle */}
         <Menu />
-        <button className="App-Menu-toggle" onClick={uiStore.toggleMenu}>Menu</button>
+        <button className="App-Menu-toggle" onClick={UiStore.toggleMenu}>Menu</button>
 
         {/* Main Box - Monome + Play toggle*/}
         <main className="App-MainContainer">
           <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
-          <button className={`App-playBtn ${PlayBtnCl}`} onClick={omeStore.togglePlay}>{PlayBtnText}</button>
+          <button className={`App-playBtn ${PlayBtnCl}`} onClick={OmeStore.togglePlay}>{PlayBtnText}</button>
         </main>
 
       </div>

@@ -11,7 +11,7 @@ import OmeStore from './stores/OmeStore';
 // Combine these and pass to the Provider for all children to have access with `inject`
 
 ReactDOM.render( 
-  <Provider uiStore={UiStore} omeStore={OmeStore}>
+  <Provider UiStore={UiStore} OmeStore={OmeStore}>
     <App />
   </Provider>, 
   document.getElementById('root')

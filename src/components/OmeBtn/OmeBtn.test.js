@@ -1,7 +1,5 @@
 import OmeBtn from './OmeBtn'
 
-// this is broken until stores are passed as props. 
-// Can't easily test when stores are just "imported" :(
 describe('omeBtn component', function() {
   beforeEach(function() {
     this.omeStore = {}

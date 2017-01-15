@@ -11,18 +11,18 @@ import { midiToNote } from '../../music_constants/index'
  */
 
 const OmeBtn = function OmeBtn(props) {
-  const {rowId, noteId, omeStore} = props
-  const noteOn = omeStore.midiNotes[rowId][noteId].noteOn
-  const isCurrentRow = omeStore.currentRow === props.rowId
+  const {rowId, noteId, OmeStore} = props
+  const noteOn = OmeStore.midiNotes[rowId][noteId].noteOn
+  const isCurrentRow = OmeStore.currentRow === props.rowId
   const noteValue = midiToNote[props.note.midiNote].slice(0,-1) // get note name to display on hover. 
   const classNames = () => (
     `OmeBtn 
      ${noteOn ? 'OmeBtn-on' : ''} 
-     ${isCurrentRow && noteOn && omeStore.playing ? 'OmeBtn-on-glow' : ''}`
+     ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}`
   )
 
   return (
-    <div className={classNames()} onClick={() => omeStore.toggleOmeBtn(rowId, noteId)}>
+    <div className={classNames()} onClick={() => OmeStore.toggleOmeBtn(rowId, noteId)}>
       <span className="OmeBtn-Note-Hover">{noteValue}</span>
     </div> 
   )
@@ -31,7 +31,7 @@ const OmeBtn = function OmeBtn(props) {
 OmeBtn.propTypes = {
   rowId: PropTypes.string,
   noteId: PropTypes.string,
-  omeStore: PropTypes.object,
+  OmeStore: PropTypes.object,
 }
 
-export default inject('omeStore')(observer(OmeBtn));
+export default inject('OmeStore')(observer(OmeBtn));

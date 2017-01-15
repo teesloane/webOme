@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import UiStore from '../../stores/UiStore'
+// import UiStore from '../../stores/UiStore'
 import InputNumber from '../UiKit/InputNumber/InputNumber'
 import InputSelect from '../UiKit/InputSelect/InputSelect';
-import omeStore from '../../stores/OmeStore';
+// import OmeStore from '../../stores/OmeStore';
 
 import {KEYS_SELECTOR, SCALES, GRID} from '../../music_constants'
 import './Menu.css';
@@ -13,7 +13,8 @@ import './Menu.css';
 const Menu = function Menu(props) {
   // midi loads async, so wait until it's loaded until returning.
   // TODO: replace this with proper async notifier / spinner / alert.
-  if (!omeStore.midi) return null
+  const {UiStore, OmeStore} = props;
+  if (!OmeStore.midi) return null
 
   return (
     <main className={`Menu ${UiStore.menuOpen ? '' : 'Menu--hide'}`}>
@@ -25,9 +26,9 @@ const Menu = function Menu(props) {
           className="Select-custom" 
           name="Grid Resolution" 
           clearable={false} 
-          value={{label: `1/${omeStore.grid}`, value: omeStore.grid}}
+          value={{label: `1/${OmeStore.grid}`, value: OmeStore.grid}}
           options={GRID}
-          onChange={omeStore.selectGrid}
+          onChange={OmeStore.selectGrid}
         />
       </section>
 
@@ -38,8 +39,8 @@ const Menu = function Menu(props) {
           className="Select-custom"
           name="Key" 
           options={KEYS_SELECTOR} 
-          value={omeStore.selectedKey}
-          onChange={omeStore.selectKey} 
+          value={OmeStore.selectedKey}
+          onChange={OmeStore.selectKey} 
           clearable={false}
           deleteRemoves={false}
         />
@@ -49,30 +50,30 @@ const Menu = function Menu(props) {
           className="Select-custom"
           name="Scale" 
           options={SCALES} 
-          onChange={omeStore.selectScale}
-          value={omeStore.selectedScale}
+          onChange={OmeStore.selectScale}
+          value={OmeStore.selectedScale}
           clearable={false}
           deleteRemoves={false}
         />
 
         {/* Octave +/- */}
         <section className="Menu-octave-box">
-          <button className="btn" onClick={omeStore.decrementOctave}>-</button>
-          <div>Octave: {omeStore.octave}</div>
-          <button className="btn" onClick={omeStore.incrementOctave}>+</button>
+          <button className="btn" onClick={OmeStore.decrementOctave}>-</button>
+          <div>Octave: {OmeStore.octave}</div>
+          <button className="btn" onClick={OmeStore.incrementOctave}>+</button>
         </section>
       </section>
 
       {/*Section: Midi Setup */}
       {
-        omeStore.selectedMidiOut ? 
+        OmeStore.selectedMidiOut ? 
         <section className="Menu-section">
           <InputSelect 
             className="Select-custom"
             name="Midi Output" 
-            options={omeStore.createSelectorOptions(omeStore.midiOutputs, "name")} 
-            value={{label: omeStore.selectedMidiOut.name, value: omeStore.selectedMidiOut}}
-            onChange={ omeStore.selectMidiDevice } 
+            options={OmeStore.createSelectorOptions(OmeStore.midiOutputs, "name")} 
+            value={{label: OmeStore.selectedMidiOut.name, value: OmeStore.selectedMidiOut}}
+            onChange={ OmeStore.selectMidiDevice } 
             clearable={false}
             deleteRemoves={false}
           />
@@ -90,4 +91,4 @@ Menu.propTypes = {
 };
 
 
-export default inject('omeStore', 'uiStore')(observer(Menu));
+export default inject('OmeStore', 'UiStore')(observer(Menu));
