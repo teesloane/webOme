@@ -14,14 +14,12 @@ const OmeBtn = function OmeBtn(props) {
   const noteOn = OmeStore.midiNotes[rowId][noteId].noteOn
   const isCurrentRow = OmeStore.currentRow === props.rowId
   const noteValue = midiToNote[props.note.midiNote].slice(0,-1) // get note name to display on hover. 
-  const classNames = () => (
-    `OmeBtn 
+  const classNames = `OmeBtn
      ${noteOn ? 'OmeBtn-on' : ''} 
-     ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}`
-  )
+     ${isCurrentRow && noteOn && OmeStore.playing ? 'OmeBtn-on-glow' : ''}`;
 
   return (
-    <div className={classNames()} onClick={() => OmeStore.toggleOmeBtn(rowId, noteId)}>
+    <div className={classNames} onClick={() => OmeStore.toggleOmeBtn(rowId, noteId)}>
       <span className="OmeBtn-Note-Hover">{noteValue}</span>
     </div> 
   )

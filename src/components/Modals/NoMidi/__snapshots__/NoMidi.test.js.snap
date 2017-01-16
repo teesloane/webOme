@@ -44,7 +44,7 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <Unknown />,
+      "_currentElement": <NoMidi />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -114,6 +114,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Unknown />,
+  "unrendered": <NoMidi />,
 }
 `;

@@ -40,7 +40,7 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <Unknown
+      "_currentElement": <OmeRow
         notes={
                 Object {
                         "button_0": Object {
@@ -123,7 +123,7 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Unknown
+  "unrendered": <OmeRow
     notes={
         Object {
             "button_0": Object {
