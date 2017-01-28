@@ -5,7 +5,7 @@ import './OmeBtn.css';
 
 /**
  * @description OmeStore button. Can turn on or off.
- * Interaction: onClick -> set it's state reference to it's inverse
+ * Interaction: onClick -> set it's state reference "playing" to it's inverse
  * TODO: Probably should refactor the onClick this to a method on the OmeStore class.
  */
 

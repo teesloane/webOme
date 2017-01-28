@@ -1,3 +1,7 @@
+/**
+ * @summary: Map over all notes and render a row of OmeBtn components. 
+ */
+
 import React, { PropTypes } from 'react';
 import OmeBtn from '../OmeBtn/OmeBtn';
 import './OmeRow.css';

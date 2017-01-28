@@ -5,6 +5,7 @@ import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 import uiStore from './UiStore';
 import NoMidi from '../components/Modals/NoMidi/NoMidi';
+import {midiToNote} from '../music_constants/index';
 
 // TODO: pressing "Play" should reset `this.currentStep` to 0.
 
@@ -139,6 +140,10 @@ export class OmeStore {
    * @param {array} scale: An array of strings that gets converted to midi notes with `note-parser`
    * @description Create a data structure of midiNotes to loop over and populate the OmeStore with
    * The words "Row" and "columns" here may be used interchangeably because I can't my brain
+   * Basically, webOme has a big object tree of the 64 notes, each with their own properties:
+      * id
+      * midiNote
+      * noteOn 
    */
   createNotes = (scale) => {
     for (let i = 0; i < this.numSteps; i++) {

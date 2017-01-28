@@ -25,6 +25,10 @@ class App extends Component {
     document.addEventListener('keydown', (e) => {
       if (e.code === "Space") this.props.OmeStore.togglePlay()
     })
+
+    window.onbeforeunload = function() {
+      return this.props.OmeStore.selectedMidiOut.clear();
+    }
   }
 
   /* render row + pass array of buttons */
