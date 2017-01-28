@@ -14,4 +14,3 @@ build
 .env
 npm-debug.log
 .vscode
-jsconfig.json
