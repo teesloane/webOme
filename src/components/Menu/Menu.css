@@ -1,20 +1,26 @@
 .Menu {
   display: flex;
-  background: #A1B5C5;
+  /* background: #333; */
+  background: rgb(65, 65, 65);
+  color: white;
   flex-direction: column;
   max-width: 250px;
-  padding: 1rem;
   flex: 1;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-right: 1px solid #333;
 }
 
 .Menu--hide {
-  margin-left: calc(-250px - 2rem);
+  margin-left: calc(-250px - 4rem);
 }
 
 .Menu-section {
   display: flex;
   flex-direction: column;
+  padding: 12px 24px;
+  background: rgb(65, 65, 65);
+  min-height: 70px;
+  border-bottom: 2px solid #333;
 }
 
 .Menu-octave-box {
@@ -22,4 +28,26 @@
   flex: 1;
   justify-content: space-between;
   align-items: center;
+  text-transform: uppercase;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.Menu-octave-btn {
+  background: #555;
+  color: #dfdfdf;
+  outline: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 0;
+  padding-bottom: 4px;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.Menu-octave-btn:active {
+  box-shadow: none;
 }

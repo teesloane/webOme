@@ -5,30 +5,27 @@ import { scaleMaker } from '../utils/scales.js'
 import { SCALES } from '../music_constants'
 import uiStore from './UiStore';
 import NoMidi from '../components/Modals/NoMidi/NoMidi';
-import {midiToNote} from '../music_constants/index';
-
-// TODO: pressing "Play" should reset `this.currentStep` to 0.
 
 export class OmeStore {
   // Midi-related State
-  @observable midiNotes = {}
-  @observable midi = undefined
-  @observable midiInputs = []
-  @observable midiOutputs = []
+  @observable midiNotes       = {}
+  @observable midi            = undefined
+  @observable midiInputs      = []
+  @observable midiOutputs     = []
   @observable selectedMidiOut = undefined
 
   // key / scale
-  @observable key = "A#3"
-  @observable scale = SCALES[0].value // `.value` from "react-select" component.
-  @observable scaleName = SCALES[0].label // same as above ^
+  @observable key             = "A#3"
+  @observable scale           = SCALES[0].value // `.value` from "react-select" component.
+  @observable scaleName       = SCALES[0].label // same as above ^
 
   // OmeStore functionality state
-  @observable numSteps = 8 
-  @observable currentStep = 1
-  @observable playing = false
-  @observable tempo = 120
-  @observable grid = 1
-  @observable octave = 0
+  @observable numSteps        = 16
+  @observable currentStep     = 1
+  @observable playing         = false
+  @observable tempo           = 120
+  @observable grid            = 1
+  @observable octave          = 0
 
   /* ------- Computed Values ------- */
 
@@ -210,7 +207,7 @@ export class OmeStore {
         .then(this.midiSuccess, () => { console.log('midi failed') });
       
     } else {
-      alert("Your browser does not support Midi. Bummer. You'll need Google Chrome.");
+      alert("Your browser does not support Midi. Bummer.");
     }
   }
 

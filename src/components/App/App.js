@@ -39,6 +39,7 @@ class App extends Component {
     let isDev = process.env.NODE_ENV === "development";
     let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
     let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
+    let HelpText = OmeStore.playing ? 'Fiddle with settings in the Menu on the left.' : 'Click on some boxes and press play.' 
 
     return (
       <div className="App">
@@ -65,7 +66,10 @@ class App extends Component {
         {/* Main Box - Monome + Play toggle*/}
         <main className="App-MainContainer">
           <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
-          <button className={`App-playBtn ${PlayBtnCl}`} onClick={OmeStore.togglePlay}>{PlayBtnText}</button>
+          <button className={`App-playBtn ${PlayBtnCl}`} onClick={OmeStore.togglePlay}>
+            <div>{PlayBtnText} </div>
+            <div className="App-playBtn-help-text">{HelpText}</div>
+          </button>
         </main>
 
       </div>

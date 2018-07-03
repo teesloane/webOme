@@ -1,14 +1,22 @@
-import React, { PropTypes } from 'react';
-import {observer, inject} from 'mobx-react'
-import './InputNumber.css';
+import React, { PropTypes } from "react";
+import { observer, inject } from "mobx-react";
+import "./InputNumber.css";
 
 const InputNumber = function(props) {
-  const {OmeStore, max, min, id, label} = props;
+  const { OmeStore, className, max, min, id, label } = props;
 
   return (
     <main className="InputNumber">
       <label className="label-standard" htmlFor={id}>{label}</label>
-      <input id={id} type="number" min={min} max={max} onChange={OmeStore.changeTempo} value={OmeStore.tempo} />
+      <input
+        className={"input-base " + className}
+        id={id}
+        type="number"
+        min={min}
+        max={max}
+        onChange={OmeStore.changeTempo}
+        value={OmeStore.tempo}
+      />
     </main>
   );
 };
@@ -16,7 +24,7 @@ const InputNumber = function(props) {
 InputNumber.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.number
 };
 
-export default inject('OmeStore')(observer(InputNumber))
+export default inject("OmeStore")(observer(InputNumber));

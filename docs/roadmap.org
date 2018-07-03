@@ -1,0 +1,37 @@
+* MVP:
+** [X] User should be able to sequence external midi gear ( need gear to test on )
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should be able to sequence software (IAC Bus) 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should be able to choose from different midi devices. 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should be able to set tempo 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should have basic sequencer functionality (1 or 2 bar loop with 8 possible notes. @done (12/19/2016, 6:53:31 PM)
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] Create a play / pause button 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should be able to set scale / key 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] Set octave 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] Hitting "Space" should start / stop the sequencer 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] Be able to see current step in the sequence 
+CLOSED: [2018-07-03 Tue 14:27]
+** [X] User should be able to see which note is on which btn. 
+CLOSED: [2018-07-03 Tue 14:27]
+
+* Next 
+** [ ] Fix styles of hover text and colour.
+** [ ] enable changing sequence ammount
+** [ ] clear pattern button.
+** [ ] Handle forever midi notes on tab close / stop on tab switch
+** [ ] Handle connected/disconnected midi device.
+** [ ] connect tone.js and add audio synthesis if no hardware connected.
+** 
+* Advanced Features:
+** [ ] Each OmeBtn can have it's own velocity, gate, pitch, etc.
+** [ ] Sequence "banks" for switching on the fly.
+** [ ] Velocity graph underneath each column? OR, draggable velocity on the ome note itself.
+** [ ] Tap tempo

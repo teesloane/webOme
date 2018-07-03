@@ -1,4 +1,30 @@
 .InputSelect {
   display: flex;
   flex-direction: column;
+
+}
+
+.label-standard {
+  text-transform: uppercase;
+}
+
+
+/* Custom select stuff  ¯\_(ツ)_/¯   */
+.custom-select-styles > .Select-control  {
+  background: #333 !important;
+  border-radius: 0px;
+  color: white;
+}
+
+.custom-select-styles .Select-value .Select-value-label {
+  color: white !important;
+}
+
+.custom-select-styles .Select-value {
+  background: #444;
+}
+
+.select-option {
+  background: #333;
+  color: #efefef;
 }

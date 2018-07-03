@@ -2,3 +2,13 @@
   display: flex;
   flex-direction: column;
 }
+
+
+.input-base {
+  background: #444;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  color: #efefef;
+  font-size: 14px;
+
+}
