@@ -32,7 +32,16 @@ class App extends Component {
   }
 
   /* render row + pass array of buttons */
-  renderMidiRow = () => map(this.props.OmeStore.midiNotes, (row, k) => <OmeRow key={k} rowId={k} notes={row} /> )
+  renderMidiRow = () => 
+    map(this.props.OmeStore.midiNotes, (row, k) =>  {
+      let row_num = parseInt(k.split("_")[1]);
+      if (row_num < this.props.OmeStore.numSteps) {
+      return <OmeRow key={k} rowId={k} notes={row} /> 
+      }
+      
+      // return <OmeRow key={k} rowId={k} notes={row} /> 
+    }
+        )
 
   render() {
     const {OmeStore, UiStore} = this.props

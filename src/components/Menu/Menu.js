@@ -2,7 +2,7 @@ import React, { PropTypes } from "react";
 import { observer, inject } from "mobx-react";
 import InputNumber from "../UiKit/InputNumber/InputNumber";
 import InputSelect from "../UiKit/InputSelect/InputSelect";
-import { KEYS_SELECTOR, SCALES, GRID } from "../../music_constants";
+import { KEYS_SELECTOR, SCALES, GRID, NUM_STEPS } from "../../music_constants";
 import "./Menu.css";
 
 const Menu = function Menu(props) {
@@ -27,6 +27,18 @@ const Menu = function Menu(props) {
           value={{ label: `1/${OmeStore.grid}`, value: OmeStore.grid }}
           options={GRID}
           onChange={OmeStore.selectGrid}
+        />
+      </section>
+
+
+      <section className="Menu-section">
+        <InputSelect
+          className="Select-custom"
+          name="Sequencer Steps"
+          clearable={false}
+          value={{ label: OmeStore.numSteps, value: NUM_STEPS[OmeStore.currentStep] }}
+          options={NUM_STEPS}
+          onChange={OmeStore.setNumSteps}
         />
       </section>
 

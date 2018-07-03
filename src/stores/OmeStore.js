@@ -24,7 +24,7 @@ export class OmeStore {
   @observable currentStep     = 1
   @observable playing         = false
   @observable tempo           = 120
-  @observable grid            = 1
+  @observable grid            = 4
   @observable octave          = 0
 
   /* ------- Computed Values ------- */
@@ -94,6 +94,13 @@ export class OmeStore {
     this.scaleName = newScale.label
     this.updateNotes(this.scaleNotes)
   }
+  
+  @action setNumSteps = (num) => {
+    console.log("this set num steps called", num)
+    this.numSteps = num.value
+    this.currentStep = 0
+    this.updateNotes(this.scaleNotes)
+  }
 
   @action changeTempo = (e) => { 
     let newTempo = e.target.value
@@ -129,7 +136,7 @@ export class OmeStore {
     if (this.currentStep === this.numSteps) this.currentStep = 0 // reset step to 0 at end of column necessary.
     this.currentStep += 1 
     this.playNote()
-    setTimeout(() => { this.playOme() }, this.bpmTime)
+    setTimeout(() => { this.playOme() }, this.bpmTime) // this should be replaced with requestAnimationFrame
   }
 
 
@@ -143,7 +150,7 @@ export class OmeStore {
       * noteOn 
    */
   createNotes = (scale) => {
-    for (let i = 0; i < this.numSteps; i++) {
+    for (let i = 0; i < 16; i++) { // hard code 16, numSteps is for ui only?
       let newOmeRow = {}
       newOmeRow[`row_${i}`] = {}
       extendObservable(this.midiNotes, newOmeRow)
@@ -185,7 +192,8 @@ export class OmeStore {
   updateNotes = (scale) => {
     let rows = Object.keys(this.midiNotes)
 
-    for(let i = 0; i < rows.length; i++) {
+    // for(let i = 0; i < rows.length; i++) {
+    for(let i = 0; i < this.numSteps; i++) {
       let currentRow = rows[i]
       let notes = Object.keys(this.midiNotes[currentRow])
 

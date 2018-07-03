@@ -8,7 +8,6 @@ const customStyles = { borderRadius: 2
                      , color: "#efefef"}
 
 const InputSelect = function(props) {
-  console.log (props.options)
   let styledOptions = props.options ? 
       props.options.map(o => Object.assign(o, {className: "select-option"}))
       : props.options
