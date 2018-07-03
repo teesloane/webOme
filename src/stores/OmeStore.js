@@ -20,7 +20,7 @@ export class OmeStore {
   @observable scaleName       = SCALES[0].label // same as above ^
 
   // OmeStore functionality state
-  @observable numSteps        = 16
+  @observable numSteps        = 8
   @observable currentStep     = 1
   @observable playing         = false
   @observable tempo           = 120

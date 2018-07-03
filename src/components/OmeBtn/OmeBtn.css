@@ -3,21 +3,22 @@
   width: 50px;
   height: 50px;
   background: none;
-  border: 2px solid #dfdfdf;
+  border: 2px solid #777;
   border-radius: 1px;
   cursor: pointer;
   margin: 0.25rem;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
 .OmeBtn-on {
-  background: #3675CD;
+  background: #6BB5F0;
 }
 
 .OmeBtn-on-glow {
-  background: #70A6F2;
-  box-shadow: 0px 0px 5px #3675CD;
+  background: #3472d3;
+  box-shadow: 0px 0px 25px 5px #3675CD;
 
 }
 
@@ -26,5 +27,5 @@
 }
 
 .OmeBtn:hover .OmeBtn-Note-Hover{
-  opacity: 0.5;
+  opacity: 0.9;
 }

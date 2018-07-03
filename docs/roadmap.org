@@ -24,7 +24,8 @@ CLOSED: [2018-07-03 Tue 14:27]
 
 * Next 
 ** [ ] Fix styles of hover text and colour.
-** [ ] enable changing sequence ammount
+** [X] enable changing sequence ammount
+CLOSED: [2018-07-03 Tue 17:38]
 ** [ ] clear pattern button.
 ** [ ] Handle forever midi notes on tab close / stop on tab switch
 ** [ ] Handle connected/disconnected midi device.
