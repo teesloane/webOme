@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { observer, inject } from 'mobx-react';
-import map from 'lodash/map'
-import DevTools from 'mobx-react-devtools';
-import Modal from 'react-modal';
-import OmeRow from '../OmeRow/OmeRow'
-import Menu from '../Menu/Menu';
-import './App.css';
-
+import React, { Component } from "react";
+import { observer, inject } from "mobx-react";
+import map from "lodash/map";
+import DevTools from "mobx-react-devtools";
+import Modal from "react-modal";
+import OmeRow from "../OmeRow/OmeRow";
+import Menu from "../Menu/Menu";
+import "./App.css";
 
 /**
  * @summary: Renders the entire application. 
@@ -18,44 +17,41 @@ import './App.css';
  * @extends {Component}
  * TODO: Refactor "Play / Pause" to it's own component. The logic for the text it renders is ugly. 
  */
-@inject('UiStore', 'OmeStore') @observer
+@inject("UiStore", "OmeStore")
+@observer
 class App extends Component {
-
   componentDidMount() {
-    document.addEventListener('keydown', (e) => {
-      if (e.code === "Space") this.props.OmeStore.togglePlay()
-    })
-
-    window.onbeforeunload = function() {
-      return this.props.OmeStore.selectedMidiOut.clear();
-    }
+    document.addEventListener("keydown", e => {
+      if (e.code === "Space") this.props.OmeStore.togglePlay();
+    });
   }
 
   /* render row + pass array of buttons */
-  renderMidiRow = () => 
-    map(this.props.OmeStore.midiNotes, (row, k) =>  {
+  renderMidiRow = () =>
+    map(this.props.OmeStore.midiNotes, (row, k) => {
       let row_num = parseInt(k.split("_")[1]);
       if (row_num < this.props.OmeStore.numSteps) {
-      return <OmeRow key={k} rowId={k} notes={row} /> 
+        return <OmeRow key={k} rowId={k} notes={row} />;
       }
-      
-      // return <OmeRow key={k} rowId={k} notes={row} /> 
-    }
-        )
+    });
 
   render() {
-    const {OmeStore, UiStore} = this.props
+    const { OmeStore, UiStore } = this.props;
     let isDev = process.env.NODE_ENV === "development";
-    let PlayBtnCl = OmeStore.playing ? 'App-playBtn--playing' : 'App-Btn--paused'
-    let PlayBtnText = OmeStore.playing ? 'Pause' : 'Play' 
-    let HelpText = OmeStore.playing ? 'Fiddle with settings in the Menu on the left.' : 'Click on some boxes and press play.' 
+    let PlayBtnCl = OmeStore.playing
+      ? "App-playBtn--playing"
+      : "App-Btn--paused";
+    let PlayBtnText = OmeStore.playing ? "Pause" : "Play";
+    let HelpText = OmeStore.playing
+      ? "Fiddle with settings in the Menu on the left."
+      : "Click on some boxes and press play.";
 
     return (
       <div className="App">
-        { isDev && <DevTools /> }
+        {isDev && <DevTools />}
 
         {/* Modals -- All / Any modal is programtically displayed here via UiStore actions */}
-        <Modal 
+        <Modal
           isOpen={UiStore.modal.show}
           className="App-modal-content"
           overlayClassName="App-modal-overlay"
@@ -63,19 +59,31 @@ class App extends Component {
           onRequestClose={() => UiStore.closeModal()}
         >
           <section className="App-modal-body">
-            <button onClick={() => UiStore.closeModal()} className="App-modal-close">X</button>
+            <button
+              onClick={() => UiStore.closeModal()}
+              className="App-modal-close"
+            >
+              X
+            </button>
             {UiStore.modal.body}
           </section>
         </Modal>
 
         {/* Menu + Toggle */}
         <Menu />
-        <button className="App-Menu-toggle" onClick={UiStore.toggleMenu}>Menu</button>
+        <button className="App-Menu-toggle" onClick={UiStore.toggleMenu}>
+          Menu
+        </button>
 
         {/* Main Box - Monome + Play toggle*/}
         <main className="App-MainContainer">
-          <section className="App-OmeContainer">{ this.renderMidiRow() } </section>
-          <button className={`App-playBtn ${PlayBtnCl}`} onClick={OmeStore.togglePlay}>
+          <section className="App-OmeContainer">
+            {this.renderMidiRow()}{" "}
+          </section>
+          <button
+            className={`App-playBtn ${PlayBtnCl}`}
+            onClick={OmeStore.togglePlay}
+          >
             <div>{PlayBtnText} </div>
             <div className="App-playBtn-help-text">{HelpText}</div>
           </button>
